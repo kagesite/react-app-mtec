@@ -1,4 +1,4 @@
-"use state"
+"use client"
 import React, { useState } from 'react'
 
 function TestQuiz() {
@@ -55,7 +55,28 @@ function TestQuiz() {
 
   return (
     <div>
-
+        {
+            start ? (
+                <div className='flex flex-col justify-center items-center border-4 rounded-lg p-8 gap-4 min-w-[400px]'>
+                    <h1 className='text-2xl font-semibold'>{questions[currnetIndex].question}</h1>
+                    <hr className='border-2 w-full border-blue-600 mb-4'/>
+                    <ul className='flex flex-col gap-4 w-2/3'>
+                        {questions[currnetIndex].answers.map((answer, i) => {
+                            return (
+                                <button 
+                                    className='text-lg border-4 transition-[0.1s] hover:border-blue-600 py-4 rounded-lg active:bg-blue-600 active:text-white active:border-blue-600'
+                                    onClick={() => handleAnswerClick(answer.correct)}
+                                    key={i}>{answer.text}</button>
+                            )
+                        })}
+                    </ul>
+                </div>
+            ) : (
+                <button 
+                    className='text-3xl text-blue-600 font-bold'
+                    onClick={handleStart}>Start Quiz</button>
+            )
+        }
     </div>
   )
 }
