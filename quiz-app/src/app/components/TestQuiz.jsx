@@ -31,9 +31,31 @@ function TestQuiz() {
     ];
 
 
+    const [start, setStart] = useState(false);
+    const [currnetIndex, setCurrnetIndex] = useState(0);
+    const [score, setScore] = useState(0);
+    const [showResult, setShowResult] = useState(false);
+
+    
+    function handleStart() {
+        setStart(true);
+    }
+
+    function handleAnswerClick(correct) {
+        if (correct) {
+            setScore((prev) => prev + 1);
+        } 
+
+        if (currnetIndex < questions.length - 1) {
+            setCurrnetIndex((prev) => prev + 1);
+        } else {
+            setShowResult(true);
+        }
+    }
+
   return (
     <div>
-      
+
     </div>
   )
 }
