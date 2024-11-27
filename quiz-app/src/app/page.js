@@ -3,7 +3,7 @@ import TestQuiz from './components/TestQuiz'
 
 function Home() {
     return (
-        <div>
+        <div className='flex flex-col justify-center items-center h-screen'>
             <TestQuiz />
         </div>
     )
