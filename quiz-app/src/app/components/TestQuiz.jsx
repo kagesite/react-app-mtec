@@ -41,6 +41,20 @@ function TestQuiz() {
         setStart(true);
     }
 
+    function handleGoHome() {
+        setStart(false);
+        setCurrentIndex(0);
+        setScore(0);
+        setShowResult(false);
+    }
+
+    function handleTryAgain() {
+        setStart(true);
+        setCurrentIndex(0);
+        setScore(0);
+        setShowResult(false);
+    }
+
     function handleAnswerClick(correct) {
         if (correct) {
             setScore((prev) => prev + 1);
@@ -65,8 +79,14 @@ function TestQuiz() {
                                 <span className='text-2xl font-semibold'> {score} of {questions.length}</span>
                             </p>
                             <div className='flex gap-4'>
-                                <button className='border-2 px-6 py-3 rounded-lg transition-[0.1s] hover:border-blue-600 py-4 rounded-lg active:bg-blue-600 active:text-white active:border-blue-600'>Go Home</button>
-                                <button className='border-2 px-6 py-3 rounded-lg transition-[0.1s] hover:border-blue-600 py-4 rounded-lg active:bg-blue-600 active:text-white active:border-blue-600'>Try Again</button>
+                                <button
+                                    className='border-2 px-6 py-3 rounded-lg transition-[0.1s] hover:border-blue-600 py-4 rounded-lg active:bg-blue-600 active:text-white active:border-blue-600'
+                                    onClick={handleGoHome}
+                                >Go Home</button>
+                                <button
+                                    className='border-2 px-6 py-3 rounded-lg transition-[0.1s] hover:border-blue-600 py-4 rounded-lg active:bg-blue-600 active:text-white active:border-blue-600'
+                                    onClick={handleTryAgain}
+                                >Try Again</button>
                             </div>
                         </div>
                     ) : (
