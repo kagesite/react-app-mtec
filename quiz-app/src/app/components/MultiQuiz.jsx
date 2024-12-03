@@ -62,7 +62,14 @@ function MultiQuiz() {
                 },
             ]
         },
-    ]
+    ];
+
+    const [selectedQuiz, setSelectedQuiz] = useState(null);
+    const [quiz, setQuiz] = useState(null);
+    const [start, setStart] = useState(false);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [score, setScore] = useState(0);
+    const [showResult, setShowResult] = useState(false);
     
     
     
