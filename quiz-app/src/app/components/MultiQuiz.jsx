@@ -225,17 +225,18 @@ function MultiQuiz() {
                     ? (null)
                     : (
                         <div className='flex flex-col items-center'>
+                            <h1 className='text-4xl mb-8'>Select a Quiz</h1>
                             <div className='flex flex-wrap gap-12 justify-center mb-12'>
                                 {
                                     quizes.map((quiz, i) => {
                                         return (
                                             <button
                                                 key={i}
-                                                className='border-2 rounded-xl max-w-[480px] py-8 px-4 text-center flex flex-col justify-center items-center gap-4'
+                                                className='border-2 rounded-xl max-w-[30%] min-w-[400px] py-6 px-2 text-center flex flex-col justify-center items-center gap-4'
                                                 onClick={() => setSelectedQuiz(i)}
                                             >
                                                 <h1 className='text-lg font-bold'>{quiz.name}</h1>
-                                                <hr className='border-blue-500 border w-[60%]' />
+                                                <hr className='border-500 border w-[60%]' />
                                                 <i className='text-sm w-[80%]'>{quiz.prompt}</i>
                                             </button>
                                         )
@@ -245,7 +246,9 @@ function MultiQuiz() {
                             <button
                                 className='border-2 w-fit px-6 py-3 rounded-xl'
                                 onClick={handleStart}
-                            >Start Quiz</button>
+                            >
+                                Start Quiz
+                            </button>
                         </div>
                     )
             }
