@@ -226,7 +226,7 @@ function MultiQuiz() {
                         showResult
                             ? (
                                 <div>
-                                    <h1>Quiz Completed!</h1>
+                                    <h1>Quiz Completed!</h1> . . 
                                     <p>Score: <span>{score} / {quiz.questions.length}</span></p>
                                     <div>
                                         <button onClick={handleTryAgain}>Try Again</button>
@@ -267,31 +267,55 @@ function MultiQuiz() {
                                         return (
                                             <button
                                                 key={i}
-                                                className={`border-2 rounded-xl max-w-[30%] min-w-[400px] py-6 px-2 text-center flex flex-col justify-center items-center gap-2
+                                                className={`border-2 rounded-xl max-w-[30%] min-w-[400px] py-6 px-2 textecenter flex flex-col justify-center items-center gap-2
+                                                
                                                     ${selectedQuiz === i
-                                                        ? `text-amber-400`
-                                                        : ""
+                                                        ? quiz.name === "Geography Quiz"
+                                                            ? "border-sky-700 text-white bg-sky-500"
+                                                            : quiz.name === "Math Quiz"
+                                                                ? "border-emerald-700 text-white bg-emerald-500"
+                                                                : quiz.name === "Science Quiz"
+                                                                    ? "border-purple-700 text-white bg-purple-500"
+                                                                    : "border-gray-700 text-gray-700"
+                                                        : "border-gray-700 text-gray-700"
                                                     }
+                                                transition-[0.1s]
                                                 `}
                                                 onClick={() => setSelectedQuiz(i)}
                                             >
-                                                <h1 className='text-lg font-bold'>{quiz.name}</h1>
-                                                {/* <hr className='border w-[60%]' /> */}
-                                                <i className='text-sm w-[80%]'>{quiz.prompt}</i>
+                                                <h1 className='text-lg font-bold'>
+                                                    {quiz.name}
+                                                </h1>
+                                                <i className='text-sm w-[80%]'>
+                                                    {quiz.prompt}
+                                                </i>
+
                                             </button>
                                         )
                                     })
                                 }
                             </div>
+
                             <button
-                                className={`border-2 w-fit px-6 py-3 rounded-xl 
+                                className={`border-2 w-fit px-6 py-3 rounded-xl
                                     ${selectedQuiz === null
-                                        ? "bg-gray-400 text-gray-200 cursor-not-allowd"
-                                        : "bg-amber-500 text-white hover:bg-amber-400"}`}
+                                        ? "bg-gray-400 text-gray-200 cursor-not-allowed"
+                                        : selectedQuiz === 0
+                                            ? "border-sky-700 text-white bg-sky-500 hover:bg-sky-400 active:bg-sky-700 active:border-sky-500"
+                                            : selectedQuiz === 1
+                                                ? "border-emerald-700 text-white bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-700 active:border-emerald-500"
+                                                : selectedQuiz === 2
+                                                    ? "border-purple-700 text-white bg-purple-500 hover:bg-purple-400 active:bg-purple-700 active:border-purple-500"
+                                                    : ""
+                                    }
+                                transition-[0.1s]
+                                `}
                                 onClick={handleStart}
                             >
                                 Start Quiz
                             </button>
+
+
                         </div >
                     )
             }
