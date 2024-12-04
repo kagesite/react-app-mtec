@@ -154,7 +154,7 @@ function MultiQuiz() {
     // I am using the Fisher-Yates shuffle algorithm.
     function shuffleArray(array) {
         const shuffled = [...array];
-        for (let i = shuffled.length - 1; i > 0; i --) {
+        for (let i = shuffled.length - 1; i > 0; i--) {
             const random = Math.floor(Math.random() * (i + 1));
             [shuffled[i], shuffled[random]] = [shuffled[random], shuffled[i]];
         }
@@ -171,6 +171,44 @@ function MultiQuiz() {
             }))
         }
     }
+
+    // Start Quiz function
+    function handleStart() {
+        if (selectedQuiz !== null) {
+            const selectedQuizData = shuffleAnswersForQuiz(quizes[selectedQuiz]);
+            setQuiz(selectedQuiz);
+            setStart(true);
+        }
+    }
+
+    // Go Home function
+    function handleGoHome() {
+        setSelectedQuiz(null);
+        setStart(false);
+        setCurrentIndex(0);
+        setScore(0);
+        setShowResult(false);
+    }
+
+    // Try Again function (this does reshuffle the answers in the quiz).
+    function handleTryAgain() {
+        if (quiz) {
+            const reshuffledQuiz = shuffleAnswersForQuiz(quiz);
+            setQuiz(reshuffledQuiz);
+            setCurrentIndex(0);
+            setScore(0);
+            setShowResult(false);
+        }
+    }
+
+
+
+
+
+
+
+
+
 
     return (
         <div>
