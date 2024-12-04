@@ -8,7 +8,6 @@ function MultiQuiz() {
         {
             name: "Geography Quiz",
             prompt: "Test your knowledge of coninents, countries, and geographical landmarks around the world!",
-            specialColor: "sky",
             questions: [
                 {
                     question: "What is the largest continent by land area?",
@@ -55,7 +54,6 @@ function MultiQuiz() {
         {
             name: "Math Quiz",
             prompt: "Challenge your math skills with problems on multiplication, division, and algebraic equations!",
-            specialColor: "green",
             questions: [
                 {
                     question: "What is 12 x 7?",
@@ -102,7 +100,6 @@ function MultiQuiz() {
         {
             name: "Science Quiz",
             prompt: "Explore the wonders of science with questions about planets, chemistry, and biology!",
-            specialColor: "purple",
             questions: [
                 {
                     question: "What planet is known as the Red Planet?",
@@ -270,11 +267,16 @@ function MultiQuiz() {
                                         return (
                                             <button
                                                 key={i}
-                                                className='border-2 rounded-xl max-w-[30%] min-w-[400px] py-6 px-2 text-center flex flex-col justify-center items-center gap-4'
+                                                className={`border-2 rounded-xl max-w-[30%] min-w-[400px] py-6 px-2 text-center flex flex-col justify-center items-center gap-2
+                                                    ${selectedQuiz === i
+                                                        ? `text-amber-400`
+                                                        : ""
+                                                    }
+                                                `}
                                                 onClick={() => setSelectedQuiz(i)}
                                             >
                                                 <h1 className='text-lg font-bold'>{quiz.name}</h1>
-                                                <hr className='border-500 border w-[60%]' />
+                                                {/* <hr className='border w-[60%]' /> */}
                                                 <i className='text-sm w-[80%]'>{quiz.prompt}</i>
                                             </button>
                                         )
@@ -282,7 +284,10 @@ function MultiQuiz() {
                                 }
                             </div>
                             <button
-                                className='border-2 w-fit px-6 py-3 rounded-xl'
+                                className={`border-2 w-fit px-6 py-3 rounded-xl 
+                                    ${selectedQuiz === null
+                                        ? "bg-gray-400 text-gray-200 cursor-not-allowd"
+                                        : "bg-amber-500 text-white hover:bg-amber-400"}`}
                                 onClick={handleStart}
                             >
                                 Start Quiz
