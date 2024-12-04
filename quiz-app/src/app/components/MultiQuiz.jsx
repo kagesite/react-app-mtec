@@ -161,6 +161,17 @@ function MultiQuiz() {
         return shuffled;
     }
 
+    // Create function to shuffle quiz answers to prevent remembering answer positions.
+    function shuffleAnswersForQuiz(quizData) {
+        return {
+            ...quizData,
+            questions: quizData.questions.map((question) => ({
+                ...question,
+                answers: shuffleArray(question.answers),
+            }))
+        }
+    }
+
     return (
         <div>
             test
