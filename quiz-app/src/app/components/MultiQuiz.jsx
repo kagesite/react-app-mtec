@@ -7,6 +7,7 @@ function MultiQuiz() {
     const quizes = [
         {
             name: "Geography Quiz",
+            prompt: "Test your knowledge of coninents, countries, and geographical landmarks around the world!",
             questions: [
                 {
                     question: "What is the largest continent by land area?",
@@ -52,6 +53,7 @@ function MultiQuiz() {
         },
         {
             name: "Math Quiz",
+            prompt: "Challenge your math skills with problems on multiplication, division, and algebraic equations!",
             questions: [
                 {
                     question: "What is 12 x 7?",
@@ -97,6 +99,7 @@ function MultiQuiz() {
         },
         {
             name: "Science Quiz",
+            prompt: "Explore the wonders of science with questions about planets, chemistry, and biology!",
             questions: [
                 {
                     question: "What planet is known as the Red Planet?",
@@ -221,8 +224,28 @@ function MultiQuiz() {
                 start
                     ? (null)
                     : (
-                        <div>
-                            <button>Start Quiz</button>
+                        <div className='flex flex-col items-center'>
+                            <div className='flex flex-wrap gap-12 justify-center mb-12'>
+                                {
+                                    quizes.map((quiz, i) => {
+                                        return (
+                                            <button
+                                                key={i}
+                                                className='border-2 rounded-xl max-w-[480px] py-8 px-4 text-center flex flex-col justify-center items-center gap-4'
+                                                onClick={() => setSelectedQuiz(i)}
+                                            >
+                                                <h1 className='text-lg font-bold'>{quiz.name}</h1>
+                                                <hr className='border-blue-500 border w-[60%]' />
+                                                <i className='text-sm w-[80%]'>{quiz.prompt}</i>
+                                            </button>
+                                        )
+                                    })
+                                }
+                            </div>
+                            <button
+                                className='border-2 w-fit px-6 py-3 rounded-xl'
+                                onClick={handleStart}
+                            >Start Quiz</button>
                         </div>
                     )
             }
