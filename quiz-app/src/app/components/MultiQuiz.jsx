@@ -201,18 +201,31 @@ function MultiQuiz() {
         }
     }
 
+    // Answer Click function. If the answer is correct, the score increases.
+    function handleAnswerClick(correct) {
+        if (correct) {
+            setScore((prev) => prev + 1);
+        }
 
-
-
-
-
-
-
+        if (currentIndex + 1 < quiz.questions.length) {
+            setCurrentIndex((prev) => prev + 1);
+        } else {
+            setShowResult(true);
+        }
+    }
 
 
     return (
         <div>
-            test
+            {
+                start
+                    ? (null)
+                    : (
+                        <div>
+                            <button>Start Quiz</button>
+                        </div>
+                    )
+            }
         </div>
     )
 }
