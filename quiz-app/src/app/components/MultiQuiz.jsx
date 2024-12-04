@@ -179,7 +179,7 @@ function MultiQuiz() {
     function handleStart() {
         if (selectedQuiz !== null) {
             const selectedQuizData = shuffleAnswersForQuiz(quizes[selectedQuiz]);
-            setQuiz(selectedQuiz);
+            setQuiz(selectedQuizData);
             setStart(true);
         }
     }
@@ -222,7 +222,42 @@ function MultiQuiz() {
         <div>
             {
                 start
-                    ? (null)
+                    ? (
+                        showResult
+                            ? (
+                                <div>
+                                    <h1>Quiz Completed!</h1>
+                                    <p>Score: <span>{score} / {quiz.questions.length}</span></p>
+                                    <div>
+                                        <button onClick={handleTryAgain}>Try Again</button>
+                                        <button onClick={handleGoHome}>Go Home</button>
+                                    </div>
+                                </div>
+                            )
+                            : (
+                                <div>
+                                    <h1>{quiz.name}</h1>
+                                    <div>
+                                        <i>{currentIndex + 1} of {quiz.questions.length}</i>
+                                        <p>{quiz.questions[currentIndex].question}</p>
+                                        <hr />
+                                        <ul>
+                                            {quiz.questions[currentIndex].answers.map((answer, i) => {
+                                                return (
+                                                    <button
+                                                        key={i}
+                                                        onClick={() => handleAnswerClick(answer.correct)}
+                                                    >
+                                                        {answer.text}
+                                                    </button>
+                                                )
+                                            })}
+                                        </ul>
+                                    </div>
+                                </div>
+                            )
+
+                    )
                     : (
                         <div className='flex flex-col items-center'>
                             <h1 className='text-4xl mb-8'>Select a Quiz</h1>
@@ -249,10 +284,10 @@ function MultiQuiz() {
                             >
                                 Start Quiz
                             </button>
-                        </div>
+                        </div >
                     )
             }
-        </div>
+        </div >
     )
 }
 
