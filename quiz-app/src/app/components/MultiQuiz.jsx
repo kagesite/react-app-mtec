@@ -8,6 +8,7 @@ function MultiQuiz() {
         {
             name: "Geography Quiz",
             prompt: "Test your knowledge of coninents, countries, and geographical landmarks around the world!",
+            specialColor: "sky",
             questions: [
                 {
                     question: "What is the largest continent by land area?",
@@ -54,6 +55,7 @@ function MultiQuiz() {
         {
             name: "Math Quiz",
             prompt: "Challenge your math skills with problems on multiplication, division, and algebraic equations!",
+            specialColor: "green",
             questions: [
                 {
                     question: "What is 12 x 7?",
@@ -100,6 +102,7 @@ function MultiQuiz() {
         {
             name: "Science Quiz",
             prompt: "Explore the wonders of science with questions about planets, chemistry, and biology!",
+            specialColor: "purple",
             questions: [
                 {
                     question: "What planet is known as the Red Planet?",
