@@ -1,6 +1,6 @@
 import React from 'react'
-// import TestQuiz from './components/TestQuiz'
 import MultiQuiz from './components/MultiQuiz'
+import IconTest from './components/IconTest'
 
 function Home() {
     return (
