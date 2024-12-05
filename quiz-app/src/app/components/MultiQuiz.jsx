@@ -225,9 +225,20 @@ function MultiQuiz() {
                     ? (
                         showResult
                             ? (
-                                <div className='flex flex-col justify-center items-center gap-4'>
-                                    <h1 className='font-bold text-3xl'>Quiz Completed!</h1>
-                                    <p className={`text-2xl font-semibold
+                                <div className='flex flex-col justify-center items-center'>
+                                    <h1 className={`font-bold text-3xl mb-4
+                                        ${selectedQuiz !== null
+                                            ? quiz.name === "Geography Quiz"
+                                                ? "text-sky-500"
+                                                : quiz.name === "Math Quiz"
+                                                    ? "text-emerald-500"
+                                                    : quiz.name === "Science Quiz"
+                                                        ? "text-purple-500"
+                                                        : ""
+                                            : ""
+                                        }
+                                    `}>Quiz Completed!</h1>
+                                    <p className={`text-3xl font-semibold mb-7
                                     
                                         ${selectedQuiz !== null
                                             ? quiz.name === "Geography Quiz"
@@ -355,8 +366,8 @@ function MultiQuiz() {
                     )
                     : (
                         <div className='flex flex-col items-center'>
-                            <h1 className='text-4xl mb-8'>Select a Quiz</h1>
-                            <div className='flex flex-wrap gap-12 justify-center mb-12'>
+                            <h1 className='text-4xl'>Select a Quiz</h1>
+                            <div className='flex flex-wrap gap-8 justify-center my-8'>
                                 {
                                     quizes.map((quiz, i) => {
                                         return (
