@@ -225,12 +225,53 @@ function MultiQuiz() {
                     ? (
                         showResult
                             ? (
-                                <div>
-                                    <h1>Quiz Completed!</h1>
-                                    <p>Score: <span>{score} / {quiz.questions.length}</span></p>
-                                    <div>
-                                        <button onClick={handleTryAgain}>Try Again</button>
-                                        <button onClick={handleGoHome}>Go Home</button>
+                                <div className='flex flex-col justify-center items-center gap-4'>
+                                    <h1 className='font-bold text-3xl'>Quiz Completed!</h1>
+                                    <p className={`text-2xl font-semibold
+                                    
+                                        ${selectedQuiz !== null
+                                            ? quiz.name === "Geography Quiz"
+                                                ? "text-sky-700"
+                                                : quiz.name === "Math Quiz"
+                                                    ? "text-emerald-700"
+                                                    : quiz.name === "Science Quiz"
+                                                        ? "text-purple-700"
+                                                        : ""
+                                            : ""
+                                        }
+                                        
+                                    `}>Score: <span className=''>{score} / {quiz.questions.length}</span></p>
+                                    <div className='flex gap-4'>
+                                        <button
+                                            className={`border-2 w-fit px-6 py-3 rounded-xl
+                                                ${selectedQuiz !== null
+                                                    ? quiz.name === "Geography Quiz"
+                                                        ? "hover:border-sky-500 active:border-sky-700 active:bg-sky-500 active:text-white"
+                                                        : quiz.name === "Math Quiz"
+                                                            ? "hover:border-emerald-500 active:border-emerald-700 active:bg-emerald-500 active:text-white"
+                                                            : quiz.name === "Science Quiz"
+                                                                ? "hover:border-purple-500 active:border-purple-700 active:bg-purple-500 active:text-white"
+                                                                : ""
+                                                    : ""
+                                                }
+                                            transition-[0.1s]
+                                            `}
+                                            onClick={handleTryAgain}>Try Again</button>
+                                        <button
+                                            className={`border-2 w-fit px-6 py-3 rounded-xl
+                                            ${selectedQuiz !== null
+                                                ? quiz.name === "Geography Quiz"
+                                                    ? "hover:border-sky-700 active:border-sky-500 active:bg-sky-700 active:text-white"
+                                                    : quiz.name === "Math Quiz"
+                                                        ? "hover:border-emerald-700 active:border-emerald-500 active:bg-emerald-700 active:text-white"
+                                                        : quiz.name === "Science Quiz"
+                                                            ? "hover:border-purple-700 active:border-purple-500 active:bg-purple-700 active:text-white"
+                                                            : ""
+                                                : ""
+                                            }
+                                        transition-[0.1s]
+                                        `}
+                                            onClick={handleGoHome}>Go Home</button>
                                     </div>
                                 </div>
                             )
@@ -288,13 +329,13 @@ function MultiQuiz() {
                                                         
                                                             ${selectedQuiz !== null
                                                                 ? quiz.name === "Geography Quiz"
-                                                                    ? "hover:border-sky-700 active:border-sky-700 active:bg-sky-500 active:text-white"
+                                                                    ? "active:border-sky-500 active:bg-sky-700 active:text-white hover:border-sky-500"
                                                                     : quiz.name === "Math Quiz"
-                                                                        ? "hover:border-emerald-700 active:border-emerald-700 active:bg-emerald-500 active:text-white"
+                                                                        ? "active:border-emerald-500 active:bg-emerald-700 active:text-white hover:border-emerald-500"
                                                                         : quiz.name === "Science Quiz"
-                                                                            ? "hover:border-purple-700 active:border-purple-700 active:bg-purple-500 active:text-white"
+                                                                            ? "active:border-purple-500 active:bg-purple-700 active:text-white hover:border-purple-500"
                                                                             : ""
-                                                                : "border-gray-300 bg-gray-100 text-gray-500"
+                                                                : ""
                                                             }
 
                                                             transition-[0.1s]
@@ -331,7 +372,7 @@ function MultiQuiz() {
                                                                 : quiz.name === "Science Quiz"
                                                                     ? "border-purple-700 text-white bg-purple-500"
                                                                     : "border-gray-700 text-gray-700"
-                                                        : "border-gray-700 text-gray-700"
+                                                        : ""
                                                     }
                                                 transition-[0.1s]
                                                 `}
