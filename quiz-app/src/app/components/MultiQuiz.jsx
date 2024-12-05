@@ -360,7 +360,7 @@ function MultiQuiz() {
                                         )
                                         : (
                                             <div className='w-[80%] mb-6 text-center'>
-                                                <h2 className="text-2xl font-bold mb-4">You got 100%!</h2>
+                                                <h2 className="text-2xl font-bold">You got 100%!</h2>
                                             </div>
                                         )
                                     }
