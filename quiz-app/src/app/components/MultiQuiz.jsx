@@ -7,7 +7,7 @@ function MultiQuiz() {
     const quizes = [
         {
             name: "Geography Quiz",
-            prompt: "Test your knowledge of coninents, countries, and geographical landmarks around the world!",
+            prompt: "Test your knowledge of continents, countries, and geographical landmarks around the world!",
             questions: [
                 {
                     question: "What is the largest continent by land area?",
