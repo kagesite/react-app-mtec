@@ -6,10 +6,11 @@ function MultiQuiz() {
     // Below is the Array that holds all the quizes and there questions and answers.
     const quizes = [
         {
+            // GEOGRAPHY QUIZ
             name: "Geography Quiz",
             prompt: "Test your knowledge of continents, countries, and geographical landmarks around the world!",
             questions: [
-                {
+                { // Geography Question 1
                     question: "What is the largest continent by land area?",
                     answers: [
                         { text: 'Asia', correct: true },
@@ -17,7 +18,7 @@ function MultiQuiz() {
                         { text: 'Europe', correct: false },
                     ]
                 },
-                {
+                { // Geography Question 2
                     question: "Which country has the most time zones?",
                     answers: [
                         { text: 'France', correct: true },
@@ -25,7 +26,7 @@ function MultiQuiz() {
                         { text: 'United States', correct: false },
                     ]
                 },
-                {
+                { // Geography Question 3
                     question: "What is the smallest country in the world by area?",
                     answers: [
                         { text: 'Vatican City', correct: true },
@@ -33,7 +34,7 @@ function MultiQuiz() {
                         { text: 'San Marino', correct: false },
                     ]
                 },
-                {
+                { // Geography Question 4
                     question: "The Nile River flows throug hwhich of these countries?",
                     answers: [
                         { text: 'Egypt', correct: true },
@@ -41,7 +42,7 @@ function MultiQuiz() {
                         { text: 'Morocco', correct: false },
                     ]
                 },
-                {
+                { // Geography Question 5
                     question: "What is the southernmost continent?",
                     answers: [
                         { text: 'Antarctica', correct: true },
@@ -52,10 +53,11 @@ function MultiQuiz() {
             ]
         },
         {
+            // MATH QUIZ
             name: "Math Quiz",
             prompt: "Challenge your math skills with problems on multiplication, division, and algebraic equations!",
             questions: [
-                {
+                { // Math Question 1
                     question: "What is 12 x 7?",
                     answers: [
                         { text: '84', correct: true },
@@ -63,7 +65,7 @@ function MultiQuiz() {
                         { text: '86', correct: false },
                     ]
                 },
-                {
+                { // Math Question 2
                     question: "Solve 45 / 9 + 3",
                     answers: [
                         { text: '8', correct: true },
@@ -71,7 +73,7 @@ function MultiQuiz() {
                         { text: '16', correct: false },
                     ]
                 },
-                {
+                { // Math Question 3
                     question: "What is the square root of 81?",
                     answers: [
                         { text: '9', correct: true },
@@ -79,7 +81,7 @@ function MultiQuiz() {
                         { text: '11', correct: false },
                     ]
                 },
-                {
+                { // Math Question 4
                     question: "If x = 5, what is the value of 3x + 2?",
                     answers: [
                         { text: '17', correct: true },
@@ -87,7 +89,7 @@ function MultiQuiz() {
                         { text: '14', correct: false },
                     ]
                 },
-                {
+                { // Math Question 5
                     question: "Solve for x: 3x + 7 = 19",
                     answers: [
                         { text: '4', correct: true },
@@ -98,10 +100,11 @@ function MultiQuiz() {
             ]
         },
         {
+            // SCIENCE QUIZ
             name: "Science Quiz",
             prompt: "Explore the wonders of science with questions about planets, chemistry, and biology!",
             questions: [
-                {
+                { // Science Question 1
                     question: "What planet is known as the Red Planet?",
                     answers: [
                         { text: 'Mars', correct: true },
@@ -109,7 +112,7 @@ function MultiQuiz() {
                         { text: 'Jupiter', correct: false },
                     ]
                 },
-                {
+                { // Science Question 2
                     question: "What is the boiling point of water in Celcius?",
                     answers: [
                         { text: '100°C', correct: true },
@@ -117,7 +120,7 @@ function MultiQuiz() {
                         { text: '212°C', correct: false },
                     ]
                 },
-                {
+                { // Science Question 3
                     question: "What gas do plants primarily absorb during photosynthesis?",
                     answers: [
                         { text: 'Carbon Dioxide', correct: true },
@@ -125,7 +128,7 @@ function MultiQuiz() {
                         { text: 'Nitrogen', correct: false },
                     ]
                 },
-                {
+                { // Science Question 4
                     question: "What is the chemical symbol for water?",
                     answers: [
                         { text: 'H2O', correct: true },
@@ -133,7 +136,7 @@ function MultiQuiz() {
                         { text: 'CO2', correct: false },
                     ]
                 },
-                {
+                { // Science Question 5
                     question: "How many legs does a spider have?",
                     answers: [
                         { text: '8', correct: true },
@@ -207,6 +210,8 @@ function MultiQuiz() {
         }
     }
 
+    // Exit Quiz function (This allows you to exit the quiz without finishing or resfreshing the page.)
+    // This function also has a confirm message that asks if you want to exit the quiz.
     function handleExitQuiz() {
         const msg = confirm('Are you sure you want to exit?');
 
@@ -243,10 +248,14 @@ function MultiQuiz() {
         <div>
             {
                 start
+                    // If Start is true:
                     ? (
                         showResult
+                            // If Show result is true:
+                            // RESULT PAGE START
                             ? (
                                 <div className='flex flex-col justify-center items-center'>
+
                                     <h1 className={`font-bold text-3xl mb-4
                                         ${selectedQuiz !== null
                                             ? quiz.name === "Geography Quiz"
@@ -258,7 +267,9 @@ function MultiQuiz() {
                                                         : ""
                                             : ""
                                         }
-                                    `}>Quiz Completed!</h1>
+                                    `}>
+                                        Quiz Completed!
+                                    </h1>
                                     <p className={`text-3xl font-semibold mb-7
                                     
                                         ${selectedQuiz !== null
@@ -272,7 +283,9 @@ function MultiQuiz() {
                                             : ""
                                         }
                                         
-                                    `}>Score: <span className=''>{score} / {quiz.questions.length}</span></p>
+                                    `}>
+                                        Score: <span className=''>{score} / {quiz.questions.length}</span>
+                                    </p>
 
 
                                     {/*  REVIEW SECTION */}
@@ -341,6 +354,10 @@ function MultiQuiz() {
                                     </div>
                                 </div>
                             )
+                            // RESULT PAGE END
+
+                            // If showResult is false:
+                            // QUIZ UI START
                             : (
                                 <div>
                                     <div className="flex justify-between items-center mb-6">
@@ -497,6 +514,7 @@ function MultiQuiz() {
 
                         </div >
                     )
+                // QUIZ UI END
             }
         </div >
     )
