@@ -360,7 +360,7 @@ function MultiQuiz() {
                                             `}
                                             onClick={handleExitQuiz}
                                         >
-                                            Exit Quiz
+                                            Exit
                                         </button>
                                     </div>
 
