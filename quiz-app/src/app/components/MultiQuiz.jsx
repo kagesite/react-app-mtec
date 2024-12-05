@@ -226,7 +226,7 @@ function MultiQuiz() {
                         showResult
                             ? (
                                 <div>
-                                    <h1>Quiz Completed!</h1> . . 
+                                    <h1>Quiz Completed!</h1>
                                     <p>Score: <span>{score} / {quiz.questions.length}</span></p>
                                     <div>
                                         <button onClick={handleTryAgain}>Try Again</button>
@@ -236,16 +236,70 @@ function MultiQuiz() {
                             )
                             : (
                                 <div>
-                                    <h1>{quiz.name}</h1>
-                                    <div>
-                                        <i>{currentIndex + 1} of {quiz.questions.length}</i>
-                                        <p>{quiz.questions[currentIndex].question}</p>
-                                        <hr />
-                                        <ul>
+                                    <h1 className={`font-bold text-3xl mb-6
+
+                                        ${selectedQuiz !== null
+                                            ? quiz.name === "Geography Quiz"
+                                                ? "text-sky-500"
+                                                : quiz.name === "Math Quiz"
+                                                    ? "text-emerald-500"
+                                                    : quiz.name === "Science Quiz"
+                                                        ? "text-purple-500"
+                                                        : "text-grey-500"
+                                            : ""
+                                        }
+                                    
+                                    `}>{quiz.name}</h1>
+
+                                    <div className={`border-2 rounded-xl p-4 flex flex-col justify-center items-center min-w-[400px]
+
+                                        ${selectedQuiz !== null
+                                            ? quiz.name === 'Geography Quiz'
+                                                ? "border-sky-700"
+                                                : quiz.name === "Math Quiz"
+                                                    ? "border-emerald-700"
+                                                    : quiz.name === "Science Quiz"
+                                                        ? "border-purple-700"
+                                                        : ""
+                                            : ""
+                                        }
+                                    
+                                    `}>
+                                        <i className='text-gray-400 font-semibold mb-2'>Question {currentIndex + 1} of {quiz.questions.length}</i>
+                                        <p className='text-center mb-4'>{quiz.questions[currentIndex].question}</p>
+                                        <hr className={`border w-[80%] mb-6
+                                            ${selectedQuiz !== null
+                                                ? quiz.name === 'Geography Quiz'
+                                                    ? "border-sky-700"
+                                                    : quiz.name === "Math Quiz"
+                                                        ? "border-emerald-700"
+                                                        : quiz.name === "Science Quiz"
+                                                            ? "border-purple-700"
+                                                            : ""
+                                                : ""
+                                            }
+                                        '`} />
+                                        <ul className='flex flex-col gap-6 w-[80%]'>
                                             {quiz.questions[currentIndex].answers.map((answer, i) => {
                                                 return (
                                                     <button
                                                         key={i}
+                                                        className={`border-2 rounded-lg p-4
+                                                        
+                                                            ${selectedQuiz !== null
+                                                                ? quiz.name === "Geography Quiz"
+                                                                    ? "hover:border-sky-700 active:border-sky-700 active:bg-sky-500 active:text-white"
+                                                                    : quiz.name === "Math Quiz"
+                                                                        ? "hover:border-emerald-700 active:border-emerald-700 active:bg-emerald-500 active:text-white"
+                                                                        : quiz.name === "Science Quiz"
+                                                                            ? "hover:border-purple-700 active:border-purple-700 active:bg-purple-500 active:text-white"
+                                                                            : ""
+                                                                : "border-gray-300 bg-gray-100 text-gray-500"
+                                                            }
+
+                                                            transition-[0.1s]
+                                                        
+                                                        `}
                                                         onClick={() => handleAnswerClick(answer.correct)}
                                                     >
                                                         {answer.text}
