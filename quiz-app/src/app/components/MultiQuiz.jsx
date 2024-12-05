@@ -277,28 +277,35 @@ function MultiQuiz() {
 
                                     {/*  REVIEW SECTION */}
 
-                                    {wrongAnswers.length > 0 && (
-                                        <div className='w-[80%] mb-6'>
-                                            <h2 className="text-2xl font-bold mb-4">
-                                                Review Incorrect Answers:
-                                            </h2>
-                                            <ul className="list-disc pl-5">
-                                                {wrongAnswers.map((question, i) => (
-                                                    <li key={i} className='mb-2'>
-                                                        <p className="font-semibold">
-                                                            {question.question}
-                                                        </p>
-                                                        <p className="text-gray-700">
-                                                            Correct Answer: {" "}
-                                                            <span className="font-bold">
-                                                                {question.answers.find((answer) => answer.correct).text}
-                                                            </span>
-                                                        </p>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                    )}
+                                    {wrongAnswers.length > 0
+                                        ? (
+                                            <div className='w-[80%] mb-6'>
+                                                <h2 className="text-2xl font-bold mb-4">
+                                                    Review Incorrect Answers:
+                                                </h2>
+                                                <ul className="list-disc pl-5">
+                                                    {wrongAnswers.map((question, i) => (
+                                                        <li key={i} className='mb-2'>
+                                                            <p className="font-semibold">
+                                                                {question.question}
+                                                            </p>
+                                                            <p className="text-gray-700">
+                                                                Correct Answer: {" "}
+                                                                <span className="font-bold">
+                                                                    {question.answers.find((answer) => answer.correct).text}
+                                                                </span>
+                                                            </p>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        )
+                                        : (
+                                            <div className='w-[80%] mb-6 text-center'>
+                                                <h2 className="text-2xl font-bold mb-4">You got 100%!</h2>
+                                            </div>
+                                        )
+                                    }
 
                                     <div className='flex gap-4'>
                                         <button
