@@ -270,7 +270,9 @@ function MultiQuiz() {
                                     `}>
                                         Quiz Completed!
                                     </h1>
-                                    <p className={`text-3xl font-semibold mb-7
+
+                                    {/* SCORE */}
+                                    <p className={`text-3xl font-semibold mb-4
                                     
                                         ${selectedQuiz !== null
                                             ? quiz.name === "Geography Quiz"
@@ -292,25 +294,68 @@ function MultiQuiz() {
 
                                     {wrongAnswers.length > 0
                                         ? (
-                                            <div className='w-[80%] mb-6'>
-                                                <h2 className="text-2xl font-bold mb-4">
+                                            <div className='w-[80%] mb-6 min-w-[400px]'>
+                                                <h2 className={`text-2xl font-bold mb-4 text-center
+                                                    ${ selectedQuiz !== null
+                                                        ? quiz.name === "Geography Quiz"
+                                                            ? "text-amber-500"
+                                                            : quiz.name === "Math Quiz"
+                                                                ? "text-rose-500"
+                                                                : quiz.name === "Science Quiz"
+                                                                    ? "text-yellow-500"
+                                                                    : ""
+                                                        : ""
+                                                        
+                                                    }
+                                                
+                                                `}>
                                                     Review Incorrect Answers:
                                                 </h2>
-                                                <ul className="list-disc pl-5">
-                                                    {wrongAnswers.map((question, i) => (
-                                                        <li key={i} className='mb-2'>
-                                                            <p className="font-semibold">
-                                                                {question.question}
-                                                            </p>
-                                                            <p className="text-gray-700">
-                                                                Correct Answer: {" "}
-                                                                <span className="font-bold">
-                                                                    {question.answers.find((answer) => answer.correct).text}
-                                                                </span>
-                                                            </p>
-                                                        </li>
-                                                    ))}
-                                                </ul>
+                                                <div className={`border-2 rounded-xl p-4 flex flex-col max-h-[500px] overflow-y-scroll [&::-webkit-scrollbar-track]:rounded-full
+
+                                                    ${selectedQuiz !== null
+                                                        ? quiz.name === 'Geography Quiz'
+                                                            ? "border-amber-500"
+                                                            : quiz.name === "Math Quiz"
+                                                                ? "border-rose-500"
+                                                                : quiz.name === "Science Quiz"
+                                                                    ? "border-yellow-500"
+                                                                    : ""
+                                                        : ""
+                                                    }
+
+                                                `}>
+
+                                                    <ul className="flex flex-col justify-center gap-8 p-4">
+                                                        {wrongAnswers.map((question, i) => (
+                                                            <li key={i} className='border-2 p-4 rounded-lg'>
+                                                                <p className="font-semibold text-lg mb-1">
+                                                                    {question.question}
+                                                                </p>
+                                                                <p className="text-gray-500 text-lg">
+                                                                    Correct Answer: {" "}
+                                                                    <span className={`font-bold 
+
+                                                                        ${ selectedQuiz !== null
+                                                                            ? quiz.name === "Geography Quiz"
+                                                                                ? "text-amber-500"
+                                                                                : quiz.name === "Math Quiz"
+                                                                                    ? "text-rose-500"
+                                                                                    : quiz.name === "Science Quiz"
+                                                                                        ? "text-yellow-500"
+                                                                                        : ""
+                                                                            : ""
+                                                                            
+                                                                        }
+                                                                        
+                                                                    `}>
+                                                                        {question.answers.find((answer) => answer.correct).text}
+                                                                    </span>
+                                                                </p>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
                                             </div>
                                         )
                                         : (
