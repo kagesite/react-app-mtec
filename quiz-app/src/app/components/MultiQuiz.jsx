@@ -260,15 +260,15 @@ function MultiQuiz() {
                                         <button
                                             className={`border-2 w-fit px-6 py-3 rounded-xl
                                             ${selectedQuiz !== null
-                                                ? quiz.name === "Geography Quiz"
-                                                    ? "hover:border-sky-700 active:border-sky-500 active:bg-sky-700 active:text-white"
-                                                    : quiz.name === "Math Quiz"
-                                                        ? "hover:border-emerald-700 active:border-emerald-500 active:bg-emerald-700 active:text-white"
-                                                        : quiz.name === "Science Quiz"
-                                                            ? "hover:border-purple-700 active:border-purple-500 active:bg-purple-700 active:text-white"
-                                                            : ""
-                                                : ""
-                                            }
+                                                    ? quiz.name === "Geography Quiz"
+                                                        ? "hover:border-sky-700 active:border-sky-500 active:bg-sky-700 active:text-white"
+                                                        : quiz.name === "Math Quiz"
+                                                            ? "hover:border-emerald-700 active:border-emerald-500 active:bg-emerald-700 active:text-white"
+                                                            : quiz.name === "Science Quiz"
+                                                                ? "hover:border-purple-700 active:border-purple-500 active:bg-purple-700 active:text-white"
+                                                                : ""
+                                                    : ""
+                                                }
                                         transition-[0.1s]
                                         `}
                                             onClick={handleGoHome}>Go Home</button>
