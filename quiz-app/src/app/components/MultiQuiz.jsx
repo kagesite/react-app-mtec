@@ -207,6 +207,19 @@ function MultiQuiz() {
         }
     }
 
+    function handleExitQuiz() {
+        const msg = confirm('Are you sure you want to exit?');
+
+        if (msg) {
+            setSelectedQuiz(null);
+            setStart(false);
+            setCurrentIndex(0);
+            setScore(0);
+            setShowResult(false);
+            setWrongAnswers([]);
+        }
+    }
+
     // Answer Click function. If the answer is correct, the score increases.
     function handleAnswerClick(correct) {
         if (!correct) {
@@ -287,13 +300,6 @@ function MultiQuiz() {
                                         </div>
                                     )}
 
-
-
-
-
-
-
-
                                     <div className='flex gap-4'>
                                         <button
                                             className={`border-2 w-fit px-6 py-3 rounded-xl
@@ -330,20 +336,33 @@ function MultiQuiz() {
                             )
                             : (
                                 <div>
-                                    <h1 className={`font-bold text-3xl mb-6
+                                    <div className="flex justify-between items-center mb-6">
+                                        <h1 className={`font-bold text-3xl
 
                                         ${selectedQuiz !== null
-                                            ? quiz.name === "Geography Quiz"
-                                                ? "text-sky-500"
-                                                : quiz.name === "Math Quiz"
-                                                    ? "text-emerald-500"
-                                                    : quiz.name === "Science Quiz"
-                                                        ? "text-purple-500"
-                                                        : "text-grey-500"
-                                            : ""
-                                        }
+                                                ? quiz.name === "Geography Quiz"
+                                                    ? "text-sky-500"
+                                                    : quiz.name === "Math Quiz"
+                                                        ? "text-emerald-500"
+                                                        : quiz.name === "Science Quiz"
+                                                            ? "text-purple-500"
+                                                            : "text-grey-500"
+                                                : ""
+                                            }
                                     
-                                    `}>{quiz.name}</h1>
+                                        `}>
+                                            {quiz.name}
+                                        </h1>
+
+                                        <button
+                                            className={`border-2 w-fit text-sm px-3 py-1 rounded-xl text-gray-500 transition-[0.1s]
+                                                hover:text-white hover:border-red-500 hover:bg-red-700
+                                            `}
+                                            onClick={handleExitQuiz}
+                                        >
+                                            Exit Quiz
+                                        </button>
+                                    </div>
 
                                     <div className={`border-2 rounded-xl p-4 flex flex-col justify-center items-center min-w-[400px]
 
@@ -361,7 +380,7 @@ function MultiQuiz() {
                                     `}>
                                         <i className='text-gray-400 font-semibold mb-2'>Question {currentIndex + 1} of {quiz.questions.length}</i>
                                         <p className='text-center mb-4'>{quiz.questions[currentIndex].question}</p>
-                                        <hr className={`border w-[80%] mb-6
+                                        <hr className={`border w-[80%] mb-8
                                             ${selectedQuiz !== null
                                                 ? quiz.name === 'Geography Quiz'
                                                     ? "border-sky-700"
@@ -373,7 +392,7 @@ function MultiQuiz() {
                                                 : ""
                                             }
                                         '`} />
-                                        <ul className='flex flex-col gap-6 w-[80%]'>
+                                        <ul className='flex flex-col gap-6 w-[80%] mb-8'>
                                             {quiz.questions[currentIndex].answers.map((answer, i) => {
                                                 return (
                                                     <button
@@ -401,7 +420,12 @@ function MultiQuiz() {
                                                 )
                                             })}
                                         </ul>
+                                        <hr className={`border w-[80%] mb-6 
+                                            
+                                        '`} />
+
                                     </div>
+
                                 </div>
                             )
 
