@@ -403,7 +403,7 @@ function MultiQuiz() {
                             </div>
 
                             <button
-                                className={`border-2 w-fit px-6 py-3 rounded-xl
+                        className={`border-2 w-fit px-6 py-3 rounded-xl
                                     ${selectedQuiz === null
                                         ? "bg-gray-400 text-gray-200 cursor-not-allowed"
                                         : selectedQuiz === 0
