@@ -152,6 +152,7 @@ function MultiQuiz() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [score, setScore] = useState(0);
     const [showResult, setShowResult] = useState(false);
+    const [wrongAnswers, setWrongAnswers] = useState([]);
 
     // Create function to shuffle an array.
     // I am using the Fisher-Yates shuffle algorithm.
@@ -191,6 +192,7 @@ function MultiQuiz() {
         setCurrentIndex(0);
         setScore(0);
         setShowResult(false);
+        setWrongAnswers([]);
     }
 
     // Try Again function (this does reshuffle the answers in the quiz).
@@ -201,12 +203,18 @@ function MultiQuiz() {
             setCurrentIndex(0);
             setScore(0);
             setShowResult(false);
+            setWrongAnswers([]);
         }
     }
 
     // Answer Click function. If the answer is correct, the score increases.
     function handleAnswerClick(correct) {
-        if (correct) {
+        if (!correct) {
+            setWrongAnswers((prev) => [
+                ...prev,
+                quiz.questions[currentIndex]
+            ]);
+        } else {
             setScore((prev) => prev + 1);
         }
 
@@ -252,6 +260,40 @@ function MultiQuiz() {
                                         }
                                         
                                     `}>Score: <span className=''>{score} / {quiz.questions.length}</span></p>
+
+
+                                    {/*  REVIEW SECTION */}
+
+                                    {wrongAnswers.length > 0 && (
+                                        <div className='w-[80%] mb-6'>
+                                            <h2 className="text-2xl font-bold mb-4">
+                                                Review Incorrect Answers:
+                                            </h2>
+                                            <ul className="list-disc pl-5">
+                                                {wrongAnswers.map((question, i) => (
+                                                    <li key={i} className='mb-2'>
+                                                        <p className="font-semibold">
+                                                            {question.question}
+                                                        </p>
+                                                        <p className="text-gray-700">
+                                                            Correct Answer: {" "}
+                                                            <span className="font-bold">
+                                                                {question.answers.find((answer) => answer.correct).text}
+                                                            </span>
+                                                        </p>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    )}
+
+
+
+
+
+
+
+
                                     <div className='flex gap-4'>
                                         <button
                                             className={`border-2 w-fit px-6 py-3 rounded-xl
@@ -403,7 +445,7 @@ function MultiQuiz() {
                             </div>
 
                             <button
-                        className={`border-2 w-fit px-6 py-3 rounded-xl
+                                className={`border-2 w-fit px-6 py-3 rounded-xl
                                     ${selectedQuiz === null
                                         ? "bg-gray-400 text-gray-200 cursor-not-allowed"
                                         : selectedQuiz === 0
