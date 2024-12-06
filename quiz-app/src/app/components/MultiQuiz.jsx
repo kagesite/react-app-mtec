@@ -156,6 +156,7 @@ function MultiQuiz() {
     const [score, setScore] = useState(0);
     const [showResult, setShowResult] = useState(false);
     const [wrongAnswers, setWrongAnswers] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     // Create function to shuffle an array.
     // I am using the Fisher-Yates shuffle algorithm.
@@ -212,17 +213,26 @@ function MultiQuiz() {
 
     // Exit Quiz function (This allows you to exit the quiz without finishing or resfreshing the page.)
     // This function also has a confirm message that asks if you want to exit the quiz.
-    function handleExitQuiz() {
-        const msg = confirm('Are you sure you want to exit?');
+    const handleExitClick = () => {
+        setIsModalOpen(true); // Show the modal
+    }
 
-        if (msg) {
-            setSelectedQuiz(null);
-            setStart(false);
-            setCurrentIndex(0);
-            setScore(0);
-            setShowResult(false);
-            setWrongAnswers([]);
-        }
+    const confirmExit = () => {
+        setIsModalOpen(false); // Close the modal
+
+        // Reset the App
+        setSelectedQuiz(null);
+        setStart(false);
+        setCurrentIndex(0);
+        setScore(0);
+        setShowResult(false);
+        setWrongAnswers([]);
+
+        console.log("Quiz exited");
+    }
+
+    const cancelExit = () => {
+        setIsModalOpen(false) // Close the modal without exiting the quiz
     }
 
     // Answer Click function. If the answer is correct, the score increases.
@@ -296,7 +306,7 @@ function MultiQuiz() {
                                         ? (
                                             <div className='w-[80%] mb-6 min-w-[400px]'>
                                                 <h2 className={`text-2xl font-bold mb-4 text-center
-                                                    ${ selectedQuiz !== null
+                                                    ${selectedQuiz !== null
                                                         ? quiz.name === "Geography Quiz"
                                                             ? "text-amber-500"
                                                             : quiz.name === "Math Quiz"
@@ -305,7 +315,7 @@ function MultiQuiz() {
                                                                     ? "text-yellow-500"
                                                                     : ""
                                                         : ""
-                                                        
+
                                                     }
                                                 
                                                 `}>
@@ -336,7 +346,7 @@ function MultiQuiz() {
                                                                     Correct Answer: {" "}
                                                                     <span className={`font-bold 
 
-                                                                        ${ selectedQuiz !== null
+                                                                        ${selectedQuiz !== null
                                                                             ? quiz.name === "Geography Quiz"
                                                                                 ? "text-amber-500"
                                                                                 : quiz.name === "Math Quiz"
@@ -345,7 +355,7 @@ function MultiQuiz() {
                                                                                         ? "text-yellow-500"
                                                                                         : ""
                                                                             : ""
-                                                                            
+
                                                                         }
                                                                         
                                                                     `}>
@@ -427,7 +437,7 @@ function MultiQuiz() {
                                             className={`border-2 w-fit text-sm px-3 py-1 rounded-xl text-gray-500 transition-[0.1s]
                                                 hover:text-white hover:border-red-500 hover:bg-red-700
                                             `}
-                                            onClick={handleExitQuiz}
+                                            onClick={handleExitClick}
                                         >
                                             Exit
                                         </button>
@@ -489,6 +499,29 @@ function MultiQuiz() {
                                                 )
                                             })}
                                         </ul>
+
+                                        {/* Exit Modal */}
+                                        {isModalOpen && (
+                                            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                                                <div className="bg-white p-6 rounded-xl shadow-lg">
+                                                    <h2 className="text-lg font-semibold mb-4">Are you sure you want to exit the quiz?</h2>
+                                                    <div className="flex justify-between">
+                                                        <button
+                                                            className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-[0.1s]"
+                                                            onClick={confirmExit}
+                                                        >
+                                                            Yes, Exit
+                                                        </button>
+                                                        <button
+                                                            className="bg-gray-300 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-400 transition-[0.1s]"
+                                                            onClick={cancelExit}
+                                                        >
+                                                            Cancel
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
                                         <hr className={`border w-[80%] mb-6 
                                             
                                         '`} />
@@ -562,7 +595,7 @@ function MultiQuiz() {
 
                         </div >
                     )
-                    // SELECT QUIZ END
+                // SELECT QUIZ END
             }
         </div >
     )
