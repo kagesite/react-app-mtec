@@ -436,6 +436,7 @@ function MultiQuiz() {
                                         <button
                                             className={`border-2 w-fit text-sm px-3 py-1 rounded-xl text-gray-500 transition-[0.1s]
                                                 hover:text-white hover:border-red-500 hover:bg-red-700
+                                                active:border-red-500 active:bg-red-400
                                             `}
                                             onClick={handleExitClick}
                                         >
@@ -501,27 +502,37 @@ function MultiQuiz() {
                                         </ul>
 
                                         {/* Exit Modal */}
-                                        {isModalOpen && (
-                                            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                                                <div className="bg-white p-6 rounded-xl shadow-lg">
-                                                    <h2 className="text-lg font-semibold mb-4">Are you sure you want to exit the quiz?</h2>
-                                                    <div className="flex justify-between">
-                                                        <button
-                                                            className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-[0.1s]"
-                                                            onClick={confirmExit}
-                                                        >
-                                                            Yes, Exit
-                                                        </button>
-                                                        <button
-                                                            className="bg-gray-300 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-400 transition-[0.1s]"
-                                                            onClick={cancelExit}
-                                                        >
-                                                            Cancel
-                                                        </button>
+                                        {isModalOpen !== false
+                                            ? (
+                                                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                                                    <div className="bg-white p-6 rounded-xl shadow-lg w-[370px] text-center border-2 border-red-500">
+                                                        <h2 className="font-semibold mb-4">Are you sure you want to exit the quiz?</h2>
+                                                        <div className="flex justify-between">
+                                                            <button
+                                                                className="border-2 w-fit text-sm px-3 py-1 rounded-xl transition-[0.1s]
+                                                                text-white border-red-500 bg-red-700
+                                                                hover:border-red-700 hover:bg-red-500
+                                                                active:border-red-500 active:bg-red-400"
+                                                                onClick={confirmExit}
+                                                            >
+                                                                Yes, Exit
+                                                            </button>
+                                                            <button
+                                                                className="border-2 w-fit text-sm px-3 py-1 rounded-xl 
+                                                                text-gray-500 transition-[0.1s]
+                                                                hover:border-gray-700 hover:bg-gray-500 hover:text-white
+                                                                active:border-gray-500 active:bg-gray-700
+                                                                "
+                                                                onClick={cancelExit}
+                                                            >
+                                                                Cancel
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        )}
+                                            )
+                                            : ""
+                                        }
                                         <hr className={`border w-[80%] mb-6 
                                             
                                         '`} />
