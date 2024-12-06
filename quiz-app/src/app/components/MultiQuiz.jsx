@@ -499,6 +499,9 @@ function MultiQuiz() {
                             )
 
                     )
+                    // QUIZ UI END
+
+                    // SELECT QUIZ START
                     : (
                         <div className='flex flex-col items-center'>
                             <h1 className='text-4xl'>Select a Quiz</h1>
@@ -559,7 +562,7 @@ function MultiQuiz() {
 
                         </div >
                     )
-                // QUIZ UI END
+                    // SELECT QUIZ END
             }
         </div >
     )
