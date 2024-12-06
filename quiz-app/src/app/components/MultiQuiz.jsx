@@ -148,7 +148,7 @@ function MultiQuiz() {
         },
     ];
 
-    // Here are all my useState hooks.
+    // Here are all my useState variables and functions
     const [selectedQuiz, setSelectedQuiz] = useState(null);
     const [quiz, setQuiz] = useState(null);
     const [start, setStart] = useState(false);
@@ -180,7 +180,7 @@ function MultiQuiz() {
         }
     }
 
-    // Start Quiz function
+    // Start Quiz function. Starts the quiz using the selected quiz.
     function handleStart() {
         if (selectedQuiz !== null) {
             const selectedQuizData = shuffleAnswersForQuiz(quizes[selectedQuiz]);
@@ -189,7 +189,7 @@ function MultiQuiz() {
         }
     }
 
-    // Go Home function
+    // Go Home function. Reset all the useState's for refreshing the data for the quiz.
     function handleGoHome() {
         setSelectedQuiz(null);
         setStart(false);
@@ -217,6 +217,7 @@ function MultiQuiz() {
         setIsModalOpen(true); // Show the modal
     }
 
+    // Confirming the exit of the quiz
     const confirmExit = () => {
         setIsModalOpen(false); // Close the modal
 
@@ -231,6 +232,7 @@ function MultiQuiz() {
         console.log("Quiz exited");
     }
 
+    // Cancelling the exit of the quiz
     const cancelExit = () => {
         setIsModalOpen(false) // Close the modal without exiting the quiz
     }
@@ -501,7 +503,7 @@ function MultiQuiz() {
                                             })}
                                         </ul>
 
-                                        {/* Exit Modal */}
+                                        {/* EXIT MODAL */}
                                         {isModalOpen !== false
                                             ? (
                                                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -533,15 +535,10 @@ function MultiQuiz() {
                                             )
                                             : ""
                                         }
-                                        <hr className={`border w-[80%] mb-6 
-                                            
-                                        '`} />
-
+                                        <hr className={`border w-[80%] mb-6`} />
                                     </div>
-
                                 </div>
                             )
-
                     )
                     // QUIZ UI END
 
