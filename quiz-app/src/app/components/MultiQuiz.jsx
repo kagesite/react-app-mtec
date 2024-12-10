@@ -689,19 +689,19 @@ function MultiQuiz() {
                     )
 
                     : (
-                        <div className='max-w-[500px] flex flex-col gap-8 justify-center items-start text-slate-700'>
+                        <div className='max-w-[500px] flex flex-col gap-8 justify-center items-start text-[#094A39]'>
                             <h1 className='text-6xl'>Quiz App</h1>
                             <q className='text-lg'>This app offers fun, interactive quizzes in<br /> <strong>Geography, Math, and Science,</strong> each with five multiple-choice questions to test your knowledge!</q>
                             <button
-                                        className={`border-2 w-fit px-6 py-3 rounded-xl border-slate-700 text-slate-700
-                                            hover:border-green-700 hover:bg-green-500 hover:text-white
+                                        className={`border-2 w-fit px-6 py-3 rounded-xl border-[#094A39] text-[#094A39]
+                                            hover:bg-[#094A39] hover:text-white
                                          transition-[0.1s]
                                 `}
                                         onClick={handleGetStarted}
                                     >
                                         Get Started
                                     </button>
-                            <i>Built by <strong>Kagesite</strong></i>
+                                    <p className='text-[#094A39]'>&copy; 2024 <strong>KAGESITE</strong>. All rights reserved.</p>
                         </div>
                     )
             }
