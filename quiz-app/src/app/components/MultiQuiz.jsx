@@ -5,8 +5,8 @@ function MultiQuiz() {
 
     // Below is the Array that holds all the quizes and there questions and answers.
     const quizzes = [
+        // GEOGRAPHY QUIZ
         {
-            // GEOGRAPHY QUIZ
             name: "Geography Quiz",
             prompt: "Test your knowledge of continents, countries, and geographical landmarks around the world!",
             questions: [
@@ -52,8 +52,8 @@ function MultiQuiz() {
                 },
             ]
         },
+        // MATH QUIZ
         {
-            // MATH QUIZ
             name: "Math Quiz",
             prompt: "Challenge your math skills with problems on multiplication, division, and algebraic equations!",
             questions: [
@@ -99,8 +99,8 @@ function MultiQuiz() {
                 },
             ]
         },
+        // SCIENCE QUIZ
         {
-            // SCIENCE QUIZ
             name: "Science Quiz",
             prompt: "Explore the wonders of science with questions about planets, chemistry, and biology!",
             questions: [
