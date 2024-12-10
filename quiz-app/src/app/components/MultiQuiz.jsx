@@ -700,7 +700,7 @@ function MultiQuiz() {
                     : (
                         <div className='max-w-[500px] flex flex-col gap-8 justify-center items-start text-[#094A39]'>
                             <div className='flex items-center'>
-                                <img className="w-[60px] bg-[#094A39] rounded-[50%] p-1 mr-4" src="KAGESITE LOGO FILES/KAGESITE LOGO white icon only.png" alt="Logo" />
+                                <img className="w-[60px] bg-[#094A39] rounded-[50%] p-1 mr-4" src="kagesite-logo-files/kagesite-white-icon-only.png" alt="Logo" />
                                 <h1 className='text-6xl'>Quiz App</h1>
                             </div>
                             <p className='text-lg'>This app offers fun, interactive quizzes in<br /> <strong>Geography, Math, and Science,</strong> each with five multiple-choice questions to test your knowledge!</p>
