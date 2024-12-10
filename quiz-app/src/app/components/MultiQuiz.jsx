@@ -350,7 +350,7 @@ function MultiQuiz() {
                                             {wrongAnswers.length > 0
                                                 // Display User's wrong answers
                                                 ? (
-                                                    <div className='w-[80%] mb-6 min-w-[400px]'>
+                                                    <div className='w-[100%] mb-6 min-w-[400px]'>
                                                         <h2 className={`text-2xl font-bold mb-4 text-center
                                                         
                                                             ${selectedQuiz !== null
