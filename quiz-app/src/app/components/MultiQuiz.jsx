@@ -149,6 +149,7 @@ function MultiQuiz() {
     ];
 
     // Here are all my useState variables and functions
+    const [getStarted, setGetStarted] = useState(false)
     const [selectedQuiz, setSelectedQuiz] = useState(null);
     const [quiz, setQuiz] = useState(null);
     const [start, setStart] = useState(false);
@@ -156,7 +157,8 @@ function MultiQuiz() {
     const [score, setScore] = useState(0);
     const [showResult, setShowResult] = useState(false);
     const [wrongAnswers, setWrongAnswers] = useState([]);
-    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isExitQuizModalOpen, setIsExitQuizModalOpen] = useState(false)
+    const [isExitAppModalOpen, setIsExitAppModalOpen] = useState(false)
 
     // Create function to shuffle an array.
     // I am using the Fisher-Yates shuffle algorithm.
@@ -180,8 +182,22 @@ function MultiQuiz() {
         }
     }
 
+    function handleGetStarted() {
+        setGetStarted(true);
+        setSelectedQuiz(null)
+        setQuiz(null)
+        setStart(false)
+        setCurrentIndex(0)
+        setScore(0)
+        setShowResult(false)
+        setWrongAnswers([])
+        setIsExitQuizModalOpen(false);
+        setIsExitAppModalOpen(false);
+    }
+
+
     // Start Quiz function. Starts the quiz using the selected quiz.
-    function handleStart() {
+    function handleQuizStart() {
         if (selectedQuiz !== null) {
             const selectedQuizData = shuffleAnswersForQuiz(quizes[selectedQuiz]);
             setQuiz(selectedQuizData);
@@ -190,7 +206,7 @@ function MultiQuiz() {
     }
 
     // Go Home function. Reset all the useState's for refreshing the data for the quiz.
-    function handleGoHome() {
+    function handleGoToQuizMenu() {
         setSelectedQuiz(null);
         setStart(false);
         setCurrentIndex(0);
@@ -213,13 +229,13 @@ function MultiQuiz() {
 
     // Exit Quiz function (This allows you to exit the quiz without finishing or resfreshing the page.)
     // This function also has a confirm message that asks if you want to exit the quiz.
-    const handleExitClick = () => {
-        setIsModalOpen(true); // Show the modal
+    const handleExitQuizClick = () => {
+        setIsExitQuizModalOpen(true); // Show the modal
     }
 
     // Confirming the exit of the quiz
-    const confirmExit = () => {
-        setIsModalOpen(false); // Close the modal
+    const confirmExitQuiz = () => {
+        setIsExitQuizModalOpen(false); // Close the modal
 
         // Reset the App
         setSelectedQuiz(null);
@@ -233,9 +249,28 @@ function MultiQuiz() {
     }
 
     // Cancelling the exit of the quiz
-    const cancelExit = () => {
-        setIsModalOpen(false) // Close the modal without exiting the quiz
+    const cancelExitQuiz = () => {
+        setIsExitQuizModalOpen(false) // Close the modal without exiting the quiz
     }
+
+    const handleExitApp = () => {
+        setIsExitAppModalOpen(true)
+    }
+
+    const confirmExitApp = () => {
+        setGetStarted(false);
+        setSelectedQuiz(null);
+        setStart(false);
+        setCurrentIndex(0);
+        setScore(0);
+        setShowResult(false);
+        setWrongAnswers([]);
+    }
+
+    const cancelExitApp = () => {
+        setIsExitAppModalOpen(false) // Close the modal without exiting the quiz
+    }
+
 
     // Answer Click function. If the answer is correct, the score increases.
     function handleAnswerClick(correct) {
@@ -259,351 +294,413 @@ function MultiQuiz() {
     return (
         <div>
             {
-                start
-                    // If Start is true:
+                getStarted
                     ? (
-                        showResult
-                            // If Show result is true:
-                            // RESULT PAGE START
+                        start
+                            // If Start is true:
                             ? (
-                                <div className='flex flex-col justify-center items-center'>
+                                showResult
+                                    // If Show result is true:
+                                    // RESULT PAGE START
+                                    ? (
+                                        <div className='flex flex-col justify-center items-center'>
 
-                                    <h1 className={`font-bold text-3xl mb-4
+                                            <h1 className={`font-bold text-3xl mb-4
                                         ${selectedQuiz !== null
-                                            ? quiz.name === "Geography Quiz"
-                                                ? "text-sky-500"
-                                                : quiz.name === "Math Quiz"
-                                                    ? "text-emerald-500"
-                                                    : quiz.name === "Science Quiz"
-                                                        ? "text-purple-500"
-                                                        : ""
-                                            : ""
-                                        }
+                                                    ? quiz.name === "Geography Quiz"
+                                                        ? "text-sky-500"
+                                                        : quiz.name === "Math Quiz"
+                                                            ? "text-emerald-500"
+                                                            : quiz.name === "Science Quiz"
+                                                                ? "text-purple-500"
+                                                                : ""
+                                                    : ""
+                                                }
                                     `}>
-                                        Quiz Completed!
-                                    </h1>
+                                                Quiz Completed!
+                                            </h1>
 
-                                    {/* SCORE */}
-                                    <p className={`text-3xl font-semibold mb-4
+                                            {/* SCORE */}
+                                            <p className={`text-3xl font-semibold mb-4
                                     
                                         ${selectedQuiz !== null
-                                            ? quiz.name === "Geography Quiz"
-                                                ? "text-sky-700"
-                                                : quiz.name === "Math Quiz"
-                                                    ? "text-emerald-700"
-                                                    : quiz.name === "Science Quiz"
-                                                        ? "text-purple-700"
-                                                        : ""
-                                            : ""
-                                        }
+                                                    ? quiz.name === "Geography Quiz"
+                                                        ? "text-sky-700"
+                                                        : quiz.name === "Math Quiz"
+                                                            ? "text-emerald-700"
+                                                            : quiz.name === "Science Quiz"
+                                                                ? "text-purple-700"
+                                                                : ""
+                                                    : ""
+                                                }
                                         
                                     `}>
-                                        Score: <span className=''>{score} / {quiz.questions.length}</span>
-                                    </p>
+                                                Score: <span className=''>{score} / {quiz.questions.length}</span>
+                                            </p>
 
 
-                                    {/*  REVIEW SECTION */}
+                                            {/*  REVIEW SECTION */}
 
-                                    {wrongAnswers.length > 0
-                                        ? (
-                                            <div className='w-[80%] mb-6 min-w-[400px]'>
-                                                <h2 className={`text-2xl font-bold mb-4 text-center
+                                            {wrongAnswers.length > 0
+                                                ? (
+                                                    <div className='w-[80%] mb-6 min-w-[400px]'>
+                                                        <h2 className={`text-2xl font-bold mb-4 text-center
                                                     ${selectedQuiz !== null
-                                                        ? quiz.name === "Geography Quiz"
-                                                            ? "text-amber-500"
-                                                            : quiz.name === "Math Quiz"
-                                                                ? "text-rose-500"
-                                                                : quiz.name === "Science Quiz"
-                                                                    ? "text-yellow-500"
-                                                                    : ""
-                                                        : ""
+                                                                ? quiz.name === "Geography Quiz"
+                                                                    ? "text-amber-500"
+                                                                    : quiz.name === "Math Quiz"
+                                                                        ? "text-rose-500"
+                                                                        : quiz.name === "Science Quiz"
+                                                                            ? "text-yellow-500"
+                                                                            : ""
+                                                                : ""
 
-                                                    }
+                                                            }
                                                 
                                                 `}>
-                                                    Review Incorrect Answers:
-                                                </h2>
-                                                <div className={`border-2 rounded-xl p-4 flex flex-col max-h-[500px] overflow-y-scroll [&::-webkit-scrollbar-track]:rounded-full
+                                                            Review Incorrect Answers:
+                                                        </h2>
+                                                        <div className={`border-2 rounded-xl p-4 flex flex-col max-h-[500px] overflow-y-scroll scrollbar-hide
 
                                                     ${selectedQuiz !== null
-                                                        ? quiz.name === 'Geography Quiz'
-                                                            ? "border-amber-500"
-                                                            : quiz.name === "Math Quiz"
-                                                                ? "border-rose-500"
-                                                                : quiz.name === "Science Quiz"
-                                                                    ? "border-yellow-500"
-                                                                    : ""
-                                                        : ""
-                                                    }
-
-                                                `}>
-
-                                                    <ul className="flex flex-col justify-center gap-8 p-4">
-                                                        {wrongAnswers.map((question, i) => (
-                                                            <li key={i} className='border-2 p-4 rounded-lg'>
-                                                                <p className="font-semibold text-lg mb-1">
-                                                                    {question.question}
-                                                                </p>
-                                                                <p className="text-gray-500 text-lg">
-                                                                    Correct Answer: {" "}
-                                                                    <span className={`font-bold 
-
-                                                                        ${selectedQuiz !== null
-                                                                            ? quiz.name === "Geography Quiz"
-                                                                                ? "text-amber-500"
-                                                                                : quiz.name === "Math Quiz"
-                                                                                    ? "text-rose-500"
-                                                                                    : quiz.name === "Science Quiz"
-                                                                                        ? "text-yellow-500"
-                                                                                        : ""
-                                                                            : ""
-
-                                                                        }
-                                                                        
-                                                                    `}>
-                                                                        {question.answers.find((answer) => answer.correct).text}
-                                                                    </span>
-                                                                </p>
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        )
-                                        : (
-                                            <div className='w-[80%] mb-6 text-center'>
-                                                <h2 className="text-2xl font-bold">You got 100%!</h2>
-                                            </div>
-                                        )
-                                    }
-
-                                    <div className='flex gap-4'>
-                                        <button
-                                            className={`border-2 w-fit px-6 py-3 rounded-xl
-                                                ${selectedQuiz !== null
-                                                    ? quiz.name === "Geography Quiz"
-                                                        ? "hover:border-sky-500 active:border-sky-700 active:bg-sky-500 active:text-white"
-                                                        : quiz.name === "Math Quiz"
-                                                            ? "hover:border-emerald-500 active:border-emerald-700 active:bg-emerald-500 active:text-white"
-                                                            : quiz.name === "Science Quiz"
-                                                                ? "hover:border-purple-500 active:border-purple-700 active:bg-purple-500 active:text-white"
-                                                                : ""
-                                                    : ""
-                                                }
-                                            transition-[0.1s]
-                                            `}
-                                            onClick={handleTryAgain}>Try Again</button>
-                                        <button
-                                            className={`border-2 w-fit px-6 py-3 rounded-xl
-                                            ${selectedQuiz !== null
-                                                    ? quiz.name === "Geography Quiz"
-                                                        ? "hover:border-sky-700 active:border-sky-500 active:bg-sky-700 active:text-white"
-                                                        : quiz.name === "Math Quiz"
-                                                            ? "hover:border-emerald-700 active:border-emerald-500 active:bg-emerald-700 active:text-white"
-                                                            : quiz.name === "Science Quiz"
-                                                                ? "hover:border-purple-700 active:border-purple-500 active:bg-purple-700 active:text-white"
-                                                                : ""
-                                                    : ""
-                                                }
-                                        transition-[0.1s]
-                                        `}
-                                            onClick={handleGoHome}>Go Home</button>
-                                    </div>
-                                </div>
-                            )
-                            // RESULT PAGE END
-
-                            // If showResult is false:
-                            // QUIZ UI START
-                            : (
-                                <div>
-                                    <div className="flex justify-between items-center mb-6">
-                                        <h1 className={`font-bold text-3xl
-
-                                        ${selectedQuiz !== null
-                                                ? quiz.name === "Geography Quiz"
-                                                    ? "text-sky-500"
-                                                    : quiz.name === "Math Quiz"
-                                                        ? "text-emerald-500"
-                                                        : quiz.name === "Science Quiz"
-                                                            ? "text-purple-500"
-                                                            : "text-grey-500"
-                                                : ""
-                                            }
-                                    
-                                        `}>
-                                            {quiz.name}
-                                        </h1>
-
-                                        <button
-                                            className={`border-2 w-fit text-sm px-3 py-1 rounded-xl text-gray-500 transition-[0.1s]
-                                                hover:text-white hover:border-red-500 hover:bg-red-700
-                                                active:border-red-500 active:bg-red-400
-                                            `}
-                                            onClick={handleExitClick}
-                                        >
-                                            Exit
-                                        </button>
-                                    </div>
-
-                                    <div className={`border-2 rounded-xl p-4 flex flex-col justify-center items-center min-w-[400px]
-
-                                        ${selectedQuiz !== null
-                                            ? quiz.name === 'Geography Quiz'
-                                                ? "border-sky-700"
-                                                : quiz.name === "Math Quiz"
-                                                    ? "border-emerald-700"
-                                                    : quiz.name === "Science Quiz"
-                                                        ? "border-purple-700"
-                                                        : ""
-                                            : ""
-                                        }
-                                    
-                                    `}>
-                                        <i className='text-gray-400 font-semibold mb-2'>Question {currentIndex + 1} of {quiz.questions.length}</i>
-                                        <p className='text-center mb-4'>{quiz.questions[currentIndex].question}</p>
-                                        <hr className={`border w-[80%] mb-8
-                                            ${selectedQuiz !== null
-                                                ? quiz.name === 'Geography Quiz'
-                                                    ? "border-sky-700"
-                                                    : quiz.name === "Math Quiz"
-                                                        ? "border-emerald-700"
-                                                        : quiz.name === "Science Quiz"
-                                                            ? "border-purple-700"
-                                                            : ""
-                                                : ""
-                                            }
-                                        '`} />
-                                        <ul className='flex flex-col gap-6 w-[80%] mb-8'>
-                                            {quiz.questions[currentIndex].answers.map((answer, i) => {
-                                                return (
-                                                    <button
-                                                        key={i}
-                                                        className={`border-2 rounded-lg p-4
-                                                        
-                                                            ${selectedQuiz !== null
-                                                                ? quiz.name === "Geography Quiz"
-                                                                    ? "active:border-sky-500 active:bg-sky-700 active:text-white hover:border-sky-500"
+                                                                ? quiz.name === 'Geography Quiz'
+                                                                    ? "border-amber-500"
                                                                     : quiz.name === "Math Quiz"
-                                                                        ? "active:border-emerald-500 active:bg-emerald-700 active:text-white hover:border-emerald-500"
+                                                                        ? "border-rose-500"
                                                                         : quiz.name === "Science Quiz"
-                                                                            ? "active:border-purple-500 active:bg-purple-700 active:text-white hover:border-purple-500"
+                                                                            ? "border-yellow-500"
                                                                             : ""
                                                                 : ""
                                                             }
 
+                                                `}>
+
+                                                            <ul className="flex flex-col justify-center gap-8 p-4">
+                                                                {wrongAnswers.map((question, i) => (
+                                                                    <li key={i} className='border-2 p-4 rounded-lg'>
+                                                                        <p className="font-semibold text-lg mb-1">
+                                                                            {question.question}
+                                                                        </p>
+                                                                        <p className="text-gray-500 text-lg">
+                                                                            Correct Answer: {" "}
+                                                                            <span className={`font-bold 
+
+                                                                        ${selectedQuiz !== null
+                                                                                    ? quiz.name === "Geography Quiz"
+                                                                                        ? "text-amber-500"
+                                                                                        : quiz.name === "Math Quiz"
+                                                                                            ? "text-rose-500"
+                                                                                            : quiz.name === "Science Quiz"
+                                                                                                ? "text-yellow-500"
+                                                                                                : ""
+                                                                                    : ""
+
+                                                                                }
+                                                                        
+                                                                    `}>
+                                                                                {question.answers.find((answer) => answer.correct).text}
+                                                                            </span>
+                                                                        </p>
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                )
+                                                : (
+                                                    <div className='w-[80%] mb-6 text-center'>
+                                                        <h2 className="text-2xl font-bold">You got 100%!</h2>
+                                                    </div>
+                                                )
+                                            }
+
+                                            <div className='flex gap-4'>
+                                                <button
+                                                    className={`border-2 w-fit px-6 py-3 rounded-xl
+                                                ${selectedQuiz !== null
+                                                            ? quiz.name === "Geography Quiz"
+                                                                ? "hover:border-sky-500 active:border-sky-700 active:bg-sky-500 active:text-white"
+                                                                : quiz.name === "Math Quiz"
+                                                                    ? "hover:border-emerald-500 active:border-emerald-700 active:bg-emerald-500 active:text-white"
+                                                                    : quiz.name === "Science Quiz"
+                                                                        ? "hover:border-purple-500 active:border-purple-700 active:bg-purple-500 active:text-white"
+                                                                        : ""
+                                                            : ""
+                                                        }
+                                            transition-[0.1s]
+                                            `}
+                                                    onClick={handleTryAgain}>Try Again</button>
+                                                <button
+                                                    className={`border-2 w-fit px-6 py-3 rounded-xl
+                                            ${selectedQuiz !== null
+                                                            ? quiz.name === "Geography Quiz"
+                                                                ? "hover:border-sky-700 active:border-sky-500 active:bg-sky-700 active:text-white"
+                                                                : quiz.name === "Math Quiz"
+                                                                    ? "hover:border-emerald-700 active:border-emerald-500 active:bg-emerald-700 active:text-white"
+                                                                    : quiz.name === "Science Quiz"
+                                                                        ? "hover:border-purple-700 active:border-purple-500 active:bg-purple-700 active:text-white"
+                                                                        : ""
+                                                            : ""
+                                                        }
+                                        transition-[0.1s]
+                                        `}
+                                                    onClick={handleGoToQuizMenu}>Go Home</button>
+                                            </div>
+                                        </div>
+                                    )
+                                    // RESULT PAGE END
+
+                                    // If showResult is false:
+                                    // QUIZ UI START
+                                    : (
+                                        <div>
+                                            <div className="flex justify-between items-center mb-6">
+                                                <h1 className={`font-bold text-3xl
+
+                                        ${selectedQuiz !== null
+                                                        ? quiz.name === "Geography Quiz"
+                                                            ? "text-sky-500"
+                                                            : quiz.name === "Math Quiz"
+                                                                ? "text-emerald-500"
+                                                                : quiz.name === "Science Quiz"
+                                                                    ? "text-purple-500"
+                                                                    : "text-grey-500"
+                                                        : ""
+                                                    }
+                                    
+                                        `}>
+                                                    {quiz.name}
+                                                </h1>
+
+                                                <button
+                                                    className={`border-2 w-fit text-sm px-3 py-1 rounded-xl text-gray-500 transition-[0.1s]
+                                                hover:text-white hover:border-red-500 hover:bg-red-700
+                                                active:border-red-500 active:bg-red-400
+                                            `}
+                                                    onClick={handleExitQuizClick}
+                                                >
+                                                    Exit quiz
+                                                </button>
+                                            </div>
+
+                                            <div className={`border-2 rounded-xl p-4 flex flex-col justify-center items-center min-w-[400px]
+
+                                        ${selectedQuiz !== null
+                                                    ? quiz.name === 'Geography Quiz'
+                                                        ? "border-sky-700"
+                                                        : quiz.name === "Math Quiz"
+                                                            ? "border-emerald-700"
+                                                            : quiz.name === "Science Quiz"
+                                                                ? "border-purple-700"
+                                                                : ""
+                                                    : ""
+                                                }
+                                    
+                                    `}>
+                                                <i className='text-gray-400 font-semibold mb-2'>Question {currentIndex + 1} of {quiz.questions.length}</i>
+                                                <p className='text-center mb-4'>{quiz.questions[currentIndex].question}</p>
+                                                <hr className={`border w-[80%] mb-8
+                                            ${selectedQuiz !== null
+                                                        ? quiz.name === 'Geography Quiz'
+                                                            ? "border-sky-700"
+                                                            : quiz.name === "Math Quiz"
+                                                                ? "border-emerald-700"
+                                                                : quiz.name === "Science Quiz"
+                                                                    ? "border-purple-700"
+                                                                    : ""
+                                                        : ""
+                                                    }
+                                        '`} />
+                                                <ul className='flex flex-col gap-6 w-[80%] mb-8'>
+                                                    {quiz.questions[currentIndex].answers.map((answer, i) => {
+                                                        return (
+                                                            <button
+                                                                key={i}
+                                                                className={`border-2 rounded-lg p-4
+                                                        
+                                                            ${selectedQuiz !== null
+                                                                        ? quiz.name === "Geography Quiz"
+                                                                            ? "active:border-sky-500 active:bg-sky-700 active:text-white hover:border-sky-500"
+                                                                            : quiz.name === "Math Quiz"
+                                                                                ? "active:border-emerald-500 active:bg-emerald-700 active:text-white hover:border-emerald-500"
+                                                                                : quiz.name === "Science Quiz"
+                                                                                    ? "active:border-purple-500 active:bg-purple-700 active:text-white hover:border-purple-500"
+                                                                                    : ""
+                                                                        : ""
+                                                                    }
+
                                                             transition-[0.1s]
                                                         
                                                         `}
-                                                        onClick={() => handleAnswerClick(answer.correct)}
-                                                    >
-                                                        {answer.text}
-                                                    </button>
-                                                )
-                                            })}
-                                        </ul>
+                                                                onClick={() => handleAnswerClick(answer.correct)}
+                                                            >
+                                                                {answer.text}
+                                                            </button>
+                                                        )
+                                                    })}
+                                                </ul>
 
-                                        {/* EXIT MODAL */}
-                                        {isModalOpen !== false
-                                            ? (
-                                                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                                                    <div className="bg-white p-6 rounded-xl shadow-lg w-[370px] text-center border-2 border-red-500">
-                                                        <h2 className="font-semibold mb-4">Are you sure you want to exit the quiz?</h2>
-                                                        <div className="flex justify-between">
-                                                            <button
-                                                                className="border-2 w-fit text-sm px-3 py-1 rounded-xl transition-[0.1s]
+                                                {/* EXIT MODAL */}
+                                                {isExitQuizModalOpen !== false
+                                                    ? (
+                                                        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                                                            <div className="bg-white p-6 rounded-xl shadow-lg w-[370px] text-center border-2 border-red-500">
+                                                                <h2 className="font-semibold mb-4">Are you sure you want to exit the quiz?</h2>
+                                                                <div className="flex justify-between">
+                                                                    <button
+                                                                        className="border-2 w-fit text-sm px-3 py-1 rounded-xl transition-[0.1s]
                                                                 text-white border-red-500 bg-red-700
                                                                 hover:border-red-700 hover:bg-red-500
                                                                 active:border-red-500 active:bg-red-400"
-                                                                onClick={confirmExit}
-                                                            >
-                                                                Yes, Exit
-                                                            </button>
-                                                            <button
-                                                                className="border-2 w-fit text-sm px-3 py-1 rounded-xl 
+                                                                        onClick={confirmExitQuiz}
+                                                                    >
+                                                                        Yes
+                                                                    </button>
+                                                                    <button
+                                                                        className="border-2 w-fit text-sm px-3 py-1 rounded-xl 
                                                                 text-gray-500 transition-[0.1s]
                                                                 hover:border-gray-700 hover:bg-gray-500 hover:text-white
                                                                 active:border-gray-500 active:bg-gray-700
                                                                 "
-                                                                onClick={cancelExit}
-                                                            >
-                                                                Cancel
-                                                            </button>
+                                                                        onClick={cancelExitQuiz}
+                                                                    >
+                                                                        Cancel
+                                                                    </button>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            )
-                                            : ""
-                                        }
-                                        <hr className={`border w-[80%] mb-6`} />
-                                    </div>
-                                </div>
+                                                    )
+                                                    : ""
+                                                }
+                                                <hr className={`border w-[80%] mb-6`} />
+                                            </div>
+                                        </div>
+                                    )
                             )
-                    )
-                    // QUIZ UI END
+                            // QUIZ UI END
 
-                    // SELECT QUIZ START
-                    : (
-                        <div className='flex flex-col items-center'>
-                            <h1 className='text-4xl'>Select a Quiz</h1>
-                            <div className='flex flex-wrap gap-8 justify-center my-8'>
-                                {
-                                    quizes.map((quiz, i) => {
-                                        return (
-                                            <button
-                                                key={i}
-                                                className={`border-2 rounded-xl max-w-[30%] min-w-[400px] py-6 px-2 textecenter flex flex-col justify-center items-center gap-2
+                            // SELECT QUIZ START
+                            : (
+                                <div className='flex flex-col items-center max-w-[60%] min-w-[450px] m-auto'>
+                                    <div className='w-full flex justify-between'>
+                                        <h1 className='text-4xl'>Select a Quiz</h1>
+                                        <button
+                                            className={`border-2 w-fit flex-endtext-sm px-3 py-1 rounded-xl text-gray-500 transition-[0.1s]
+                                                hover:text-white hover:border-red-500 hover:bg-red-700
+                                                active:border-red-500 active:bg-red-400
+                                            `}
+                                            onClick={handleExitApp}
+                                        >
+                                            Exit app
+                                        </button>
+                                    </div>
+                                    <div className='border-2 p-8  rounded-xl flex flex-wrap gap-8 justify-center my-8'>
+                                        {
+                                            quizes.map((quiz, i) => {
+                                                return (
+                                                    <button
+                                                        key={i}
+                                                        className={`border-2 rounded-xl max-w-[30%] min-w-[400px] py-6 px-2 textecenter flex flex-col justify-center items-center gap-2
                                                 
                                                     ${selectedQuiz === i
-                                                        ? quiz.name === "Geography Quiz"
-                                                            ? "border-sky-700 text-white bg-sky-500"
-                                                            : quiz.name === "Math Quiz"
-                                                                ? "border-emerald-700 text-white bg-emerald-500"
-                                                                : quiz.name === "Science Quiz"
-                                                                    ? "border-purple-700 text-white bg-purple-500"
-                                                                    : "border-gray-700 text-gray-700"
-                                                        : ""
-                                                    }
+                                                                ? quiz.name === "Geography Quiz"
+                                                                    ? "border-sky-700 text-white bg-sky-500"
+                                                                    : quiz.name === "Math Quiz"
+                                                                        ? "border-emerald-700 text-white bg-emerald-500"
+                                                                        : quiz.name === "Science Quiz"
+                                                                            ? "border-purple-700 text-white bg-purple-500"
+                                                                            : "border-gray-700 text-gray-700"
+                                                                : ""
+                                                            }
                                                 transition-[0.1s]
                                                 `}
-                                                onClick={() => setSelectedQuiz(i)}
-                                            >
-                                                <h1 className='text-lg font-bold'>
-                                                    {quiz.name}
-                                                </h1>
-                                                <i className='text-sm w-[80%]'>
-                                                    {quiz.prompt}
-                                                </i>
+                                                        onClick={() => setSelectedQuiz(i)}
+                                                    >
+                                                        <h1 className='text-lg font-bold'>
+                                                            {quiz.name}
+                                                        </h1>
+                                                        <i className='text-sm w-[80%]'>
+                                                            {quiz.prompt}
+                                                        </i>
 
-                                            </button>
-                                        )
-                                    })
-                                }
-                            </div>
+                                                    </button>
+                                                )
+                                            })
+                                        }
+                                    </div>
 
-                            <button
-                                className={`border-2 w-fit px-6 py-3 rounded-xl
+                                    <button
+                                        className={`border-2 w-fit px-6 py-3 rounded-xl
                                     ${selectedQuiz === null
-                                        ? "bg-gray-400 text-gray-200 cursor-not-allowed"
-                                        : selectedQuiz === 0
-                                            ? "border-sky-700 text-white bg-sky-500 hover:bg-sky-400 active:bg-sky-700 active:border-sky-500"
-                                            : selectedQuiz === 1
-                                                ? "border-emerald-700 text-white bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-700 active:border-emerald-500"
-                                                : selectedQuiz === 2
-                                                    ? "border-purple-700 text-white bg-purple-500 hover:bg-purple-400 active:bg-purple-700 active:border-purple-500"
-                                                    : ""
-                                    }
+                                                ? "bg-gray-400 text-gray-200 cursor-not-allowed"
+                                                : selectedQuiz === 0
+                                                    ? "border-sky-700 text-white bg-sky-500 hover:bg-sky-400 active:bg-sky-700 active:border-sky-500"
+                                                    : selectedQuiz === 1
+                                                        ? "border-emerald-700 text-white bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-700 active:border-emerald-500"
+                                                        : selectedQuiz === 2
+                                                            ? "border-purple-700 text-white bg-purple-500 hover:bg-purple-400 active:bg-purple-700 active:border-purple-500"
+                                                            : ""
+                                            }
                                 transition-[0.1s]
                                 `}
-                                onClick={handleStart}
-                            >
-                                Start Quiz
-                            </button>
+                                        onClick={handleQuizStart}
+                                    >
+                                        Start Quiz
+                                    </button>
 
 
-                        </div >
+                                    {isExitAppModalOpen !== false
+                                        ? (
+                                            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                                                <div className="bg-white p-6 rounded-xl shadow-lg w-[370px] text-center border-2 border-red-500">
+                                                    <h2 className="font-semibold mb-4">Are you sure you want to exit the app?</h2>
+                                                    <div className="flex justify-between">
+                                                        <button
+                                                            className="border-2 w-fit text-sm px-3 py-1 rounded-xl transition-[0.1s]
+                                                                text-white border-red-500 bg-red-700
+                                                                hover:border-red-700 hover:bg-red-500
+                                                                active:border-red-500 active:bg-red-400"
+                                                            onClick={confirmExitApp}
+                                                        >
+                                                            Yes
+                                                        </button>
+                                                        <button
+                                                            className="border-2 w-fit text-sm px-3 py-1 rounded-xl 
+                                                                text-gray-500 transition-[0.1s]
+                                                                hover:border-gray-700 hover:bg-gray-500 hover:text-white
+                                                                active:border-gray-500 active:bg-gray-700
+                                                                "
+                                                            onClick={cancelExitApp}
+                                                        >
+                                                            Cancel
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )
+                                        : ""
+                                    }
+                                </div >
+                            )
+                        // SELECT QUIZ END
                     )
-                // SELECT QUIZ END
+
+                    : (
+                        <div className='max-w-[500px] flex flex-col gap-8 justify-center items-start text-slate-700'>
+                            <h1 className='text-6xl'>Quiz App</h1>
+                            <q className='text-lg'>This app offers fun, interactive quizzes in<br /> <strong>Geography, Math, and Science,</strong> each with five multiple-choice questions to test your knowledge!</q>
+                            <button
+                                        className={`border-2 w-fit px-6 py-3 rounded-xl border-slate-700 text-slate-700
+                                            hover:border-green-700 hover:bg-green-500 hover:text-white
+                                         transition-[0.1s]
+                                `}
+                                        onClick={handleGetStarted}
+                                    >
+                                        Get Started
+                                    </button>
+                            <i>Built by <strong>Kagesite</strong></i>
+                        </div>
+                    )
             }
         </div >
     )
