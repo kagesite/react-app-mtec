@@ -688,13 +688,17 @@ function MultiQuiz() {
                         // SELECT QUIZ END
                     )
 
+                    // HOME PAGE START
                     : (
                         <div className='max-w-[500px] flex flex-col gap-8 justify-center items-start text-[#094A39]'>
-                            <h1 className='text-6xl'>Quiz App</h1>
-                            <q className='text-lg'>This app offers fun, interactive quizzes in<br /> <strong>Geography, Math, and Science,</strong> each with five multiple-choice questions to test your knowledge!</q>
+                            <div className='flex items-center'>
+                                <img className="w-[60px] bg-[#094A39] rounded-[50%] p-1 mr-4" src="KAGESITE LOGO FILES/KAGESITE LOGO white icon only.png" alt="Logo" />
+                                <h1 className='text-6xl'>Quiz App</h1>
+                            </div>
+                            <p className='text-lg'>This app offers fun, interactive quizzes in<br /> <strong>Geography, Math, and Science,</strong> each with five multiple-choice questions to test your knowledge!</p>
                             <button
                                         className={`border-2 w-fit px-6 py-3 rounded-xl border-[#094A39] text-[#094A39]
-                                            hover:bg-[#094A39] hover:text-white
+                                            hover:bg-[#094A39] hover:text-white active:bg-[#1c9173] active:text-white
                                          transition-[0.1s]
                                 `}
                                         onClick={handleGetStarted}
@@ -704,6 +708,7 @@ function MultiQuiz() {
                                     <p className='text-[#094A39]'>&copy; 2024 <strong>KAGESITE</strong>. All rights reserved.</p>
                         </div>
                     )
+                    // HOME PAGE END
             }
         </div >
     )
