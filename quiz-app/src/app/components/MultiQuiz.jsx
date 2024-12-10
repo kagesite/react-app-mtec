@@ -157,7 +157,7 @@ function MultiQuiz() {
     const [getStarted, setGetStarted] = useState(false)
     const [selectedQuiz, setSelectedQuiz] = useState(null);
     const [quiz, setQuiz] = useState(null);
-    const [start, setStart] = useState(false);
+    const [startQuiz, setStartQuiz] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [score, setScore] = useState(0);
     const [showResult, setShowResult] = useState(false);
@@ -192,7 +192,7 @@ function MultiQuiz() {
         setGetStarted(true);
         setSelectedQuiz(null)
         setQuiz(null)
-        setStart(false)
+        setStartQuiz(false)
         setCurrentIndex(0)
         setScore(0)
         setShowResult(false)
@@ -207,14 +207,14 @@ function MultiQuiz() {
         if (selectedQuiz !== null) {
             const selectedQuizData = shuffleAnswersForQuiz(quizzes[selectedQuiz]);
             setQuiz(selectedQuizData);
-            setStart(true);
+            setStartQuiz(true);
         }
     }
 
     // Go Home function. Reset all the useState's for refreshing the data for the quiz.
     function handleGoToQuizMenu() {
         setSelectedQuiz(null);
-        setStart(false);
+        setStartQuiz(false);
         setCurrentIndex(0);
         setScore(0);
         setShowResult(false);
@@ -244,7 +244,7 @@ function MultiQuiz() {
 
         // Reset the App
         setSelectedQuiz(null);
-        setStart(false);
+        setStartQuiz(false);
         setCurrentIndex(0);
         setScore(0);
         setShowResult(false);
@@ -267,7 +267,7 @@ function MultiQuiz() {
     function confirmExitApp() {
         setGetStarted(false);
         setSelectedQuiz(null);
-        setStart(false);
+        setStartQuiz(false);
         setCurrentIndex(0);
         setScore(0);
         setShowResult(false);
@@ -304,7 +304,7 @@ function MultiQuiz() {
             {
                 getStarted
                     ? (
-                        start
+                        startQuiz
                             // If Start is true:
                             ? (
                                 showResult
