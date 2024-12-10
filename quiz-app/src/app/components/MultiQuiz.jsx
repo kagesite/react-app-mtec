@@ -380,8 +380,8 @@ function MultiQuiz() {
 
                                                             <ul className="flex flex-col justify-center gap-8 p-4">
                                                                 {wrongAnswers.map((question, i) => (
-                                                                    <li key={i} className='border-2 p-4 rounded-lg'>
-                                                                        <p className="font-semibold text-lg mb-1">
+                                                                    <li key={i} className='border-2 border-slate-400 p-4 rounded-lg'>
+                                                                        <p className="font-semibold text-lg mb-4">
                                                                             {question.question}
                                                                         </p>
                                                                         <p className="text-gray-500 text-lg">
@@ -419,14 +419,14 @@ function MultiQuiz() {
 
                                             <div className='flex gap-4'>
                                                 <button
-                                                    className={`border-2 w-fit px-6 py-3 rounded-xl
+                                                    className={`border-2 border-slate-400 w-fit px-6 py-3 rounded-xl
                                                 ${selectedQuiz !== null
                                                             ? quiz.name === "Geography Quiz"
-                                                                ? "hover:border-sky-500 active:border-sky-700 active:bg-sky-500 active:text-white"
+                                                                ? "hover:border-sky-700 hover:bg-sky-500 hover:text-white active:border-sky-500 active:bg-sky-700 active:text-white"
                                                                 : quiz.name === "Math Quiz"
-                                                                    ? "hover:border-emerald-500 active:border-emerald-700 active:bg-emerald-500 active:text-white"
+                                                                    ? "hover:border-emerald-700 hover:bg-emerald-500 hover:text-white active:border-emerald-500 active:bg-emerald-700 active:text-white"
                                                                     : quiz.name === "Science Quiz"
-                                                                        ? "hover:border-purple-500 active:border-purple-700 active:bg-purple-500 active:text-white"
+                                                                        ? "hover:border-purple-700 hover:bg-purple-500 hover:text-white active:border-purple-500 active:bg-purple-700 active:text-white"
                                                                         : ""
                                                             : ""
                                                         }
@@ -434,14 +434,14 @@ function MultiQuiz() {
                                             `}
                                                     onClick={handleTryAgain}>Try Again</button>
                                                 <button
-                                                    className={`border-2 w-fit px-6 py-3 rounded-xl
+                                                    className={`border-2 border-slate-400 w-fit px-6 py-3 rounded-xl
                                             ${selectedQuiz !== null
                                                             ? quiz.name === "Geography Quiz"
-                                                                ? "hover:border-sky-700 active:border-sky-500 active:bg-sky-700 active:text-white"
+                                                                ? "hover:border-sky-500 hover:bg-sky-700 hover:text-white active:border-sky-700 active:bg-sky-500 active:text-white"
                                                                 : quiz.name === "Math Quiz"
-                                                                    ? "hover:border-emerald-700 active:border-emerald-500 active:bg-emerald-700 active:text-white"
+                                                                    ? "hover:border-emerald-500 hover:bg-emerald-700 hover:text-white active:border-emerald-700 active:bg-emerald-500 active:text-white"
                                                                     : quiz.name === "Science Quiz"
-                                                                        ? "hover:border-purple-700 active:border-purple-500 active:bg-purple-700 active:text-white"
+                                                                        ? "hover:border-purple-500 hover:bg-purple-700 hover:text-white active:border-purple-700 active:bg-purple-500 active:text-white"
                                                                         : ""
                                                             : ""
                                                         }
@@ -476,7 +476,7 @@ function MultiQuiz() {
                                                 </h1>
 
                                                 <button
-                                                    className={`border-2 w-fit text-sm px-3 py-1 rounded-xl text-gray-500 transition-[0.1s]
+                                                    className={`border-2 border-slate-400 w-fit text-sm px-3 py-1 rounded-xl text-gray-500 transition-[0.1s]
                                                 hover:text-white hover:border-red-500 hover:bg-red-700
                                                 active:border-red-500 active:bg-red-400
                                             `}
@@ -519,7 +519,7 @@ function MultiQuiz() {
                                                         return (
                                                             <button
                                                                 key={i}
-                                                                className={`border-2 rounded-lg p-4
+                                                                className={`border-2 border-slate-400 rounded-lg p-4
                                                         
                                                             ${selectedQuiz !== null
                                                                         ? quiz.name === "Geography Quiz"
@@ -528,8 +528,8 @@ function MultiQuiz() {
                                                                                 ? "active:border-emerald-500 active:bg-emerald-700 active:text-white hover:border-emerald-500"
                                                                                 : quiz.name === "Science Quiz"
                                                                                     ? "active:border-purple-500 active:bg-purple-700 active:text-white hover:border-purple-500"
-                                                                                    : ""
-                                                                        : ""
+                                                                                    : "border-gray-400"
+                                                                        : "border-gray-400"
                                                                     }
 
                                                             transition-[0.1s]
@@ -575,7 +575,7 @@ function MultiQuiz() {
                                                     )
                                                     : ""
                                                 }
-                                                <hr className={`border w-[80%] mb-6`} />
+                                                <hr className={`border border-slate-400 w-[80%] mb-6`} />
                                             </div>
                                         </div>
                                     )
@@ -588,7 +588,7 @@ function MultiQuiz() {
                                     <div className='w-full flex justify-between'>
                                         <h1 className='text-4xl'>Select a Quiz</h1>
                                         <button
-                                            className={`border-2 w-fit flex-endtext-sm px-3 py-1 rounded-xl text-gray-500 transition-[0.1s]
+                                            className={`border-2 border-slate-400 w-fit flex-endtext-sm px-3 py-1 rounded-xl text-gray-500 transition-[0.1s]
                                                 hover:text-white hover:border-red-500 hover:bg-red-700
                                                 active:border-red-500 active:bg-red-400
                                             `}
@@ -597,13 +597,13 @@ function MultiQuiz() {
                                             Exit app
                                         </button>
                                     </div>
-                                    <div className='border-2 p-8  rounded-xl flex flex-wrap gap-8 justify-center my-8'>
+                                    <div className='border-2 border-slate-400 p-8 rounded-xl flex flex-wrap gap-8 justify-center my-8'>
                                         {
                                             quizzes.map((quiz, i) => {
                                                 return (
                                                     <button
                                                         key={i}
-                                                        className={`border-2 rounded-xl max-w-[30%] min-w-[400px] py-6 px-2 textecenter flex flex-col justify-center items-center gap-2
+                                                        className={`border-2 rounded-xl max-w-[30%] min-w-[400px] py-6 px-2 flex flex-col justify-center items-center gap-2
                                                 
                                                     ${selectedQuiz === i
                                                                 ? quiz.name === "Geography Quiz"
@@ -613,7 +613,7 @@ function MultiQuiz() {
                                                                         : quiz.name === "Science Quiz"
                                                                             ? "border-purple-700 text-white bg-purple-500"
                                                                             : "border-gray-700 text-gray-700"
-                                                                : ""
+                                                                : "border-slate-400"
                                                             }
                                                 transition-[0.1s]
                                                 `}
@@ -635,7 +635,7 @@ function MultiQuiz() {
                                     <button
                                         className={`border-2 w-fit px-6 py-3 rounded-xl
                                     ${selectedQuiz === null
-                                                ? "bg-gray-400 text-gray-200 cursor-not-allowed"
+                                                ? "bg-slate-400 border-slate-500 text-gray-200 cursor-not-allowed"
                                                 : selectedQuiz === 0
                                                     ? "border-sky-700 text-white bg-sky-500 hover:bg-sky-400 active:bg-sky-700 active:border-sky-500"
                                                     : selectedQuiz === 1
