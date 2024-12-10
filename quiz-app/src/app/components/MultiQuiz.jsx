@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 function MultiQuiz() {
 
     // Below is the Array that holds all the quizes and there questions and answers.
-    const quizes = [
+    const quizzes = [
         {
             // GEOGRAPHY QUIZ
             name: "Geography Quiz",
@@ -35,7 +35,7 @@ function MultiQuiz() {
                     ]
                 },
                 { // Geography Question 4
-                    question: "The Nile River flows throug hwhich of these countries?",
+                    question: "The Nile River flows through which of these countries?",
                     answers: [
                         { text: 'Egypt', correct: true },
                         { text: 'South Africa', correct: false },
@@ -113,7 +113,7 @@ function MultiQuiz() {
                     ]
                 },
                 { // Science Question 2
-                    question: "What is the boiling point of water in Celcius?",
+                    question: "What is the boiling point of water in Celsius?",
                     answers: [
                         { text: '100°C', correct: true },
                         { text: '50°C', correct: false },
@@ -147,6 +147,7 @@ function MultiQuiz() {
             ]
         },
     ];
+    
 
     // Here are all my useState variables and functions
     const [getStarted, setGetStarted] = useState(false)
@@ -199,7 +200,7 @@ function MultiQuiz() {
     // Start Quiz function. Starts the quiz using the selected quiz.
     function handleQuizStart() {
         if (selectedQuiz !== null) {
-            const selectedQuizData = shuffleAnswersForQuiz(quizes[selectedQuiz]);
+            const selectedQuizData = shuffleAnswersForQuiz(quizzes[selectedQuiz]);
             setQuiz(selectedQuizData);
             setStart(true);
         }
@@ -598,7 +599,7 @@ function MultiQuiz() {
                                     </div>
                                     <div className='border-2 p-8  rounded-xl flex flex-wrap gap-8 justify-center my-8'>
                                         {
-                                            quizes.map((quiz, i) => {
+                                            quizzes.map((quiz, i) => {
                                                 return (
                                                     <button
                                                         key={i}
