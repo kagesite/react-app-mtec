@@ -424,7 +424,7 @@ function MultiQuiz() {
                                             <div className='flex gap-4'>
                                                 <button
                                                     className={`border-2 border-slate-400 w-fit px-6 py-3 rounded-xl
-                                                ${selectedQuiz !== null
+                                                        ${selectedQuiz !== null
                                                             ? quiz.name === "Geography Quiz"
                                                                 ? "hover:border-sky-700 hover:bg-sky-500 hover:text-white active:border-sky-500 active:bg-sky-700 active:text-white"
                                                                 : quiz.name === "Math Quiz"
@@ -434,8 +434,8 @@ function MultiQuiz() {
                                                                         : ""
                                                             : ""
                                                         }
-                                            transition-[0.1s]
-                                            `}
+                                                    transition-[0.1s]
+                                                    `}
                                                     onClick={handleTryAgain}>Try Again</button>
                                                 <button
                                                     className={`border-2 border-slate-400 w-fit px-6 py-3 rounded-xl
