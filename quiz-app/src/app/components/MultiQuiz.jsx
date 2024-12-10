@@ -5,6 +5,7 @@ function MultiQuiz() {
 
     // Below is the Array that holds all the quizes and there questions and answers.
     const quizzes = [
+
         // GEOGRAPHY QUIZ
         {
             name: "Geography Quiz",
@@ -52,6 +53,7 @@ function MultiQuiz() {
                 },
             ]
         },
+
         // MATH QUIZ
         {
             name: "Math Quiz",
@@ -99,6 +101,7 @@ function MultiQuiz() {
                 },
             ]
         },
+
         // SCIENCE QUIZ
         {
             name: "Science Quiz",
@@ -146,6 +149,7 @@ function MultiQuiz() {
                 },
             ]
         },
+        
     ];
     
 
