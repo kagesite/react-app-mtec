@@ -227,14 +227,13 @@ function MultiQuiz() {
         }
     }
 
-    // Exit Quiz function (This allows you to exit the quiz without finishing or resfreshing the page.)
-    // This function also has a confirm message that asks if you want to exit the quiz.
-    const handleExitQuizClick = () => {
+    // Exit Quiz handle function
+    function handleExitQuizClick() {
         setIsExitQuizModalOpen(true); // Show the modal
     }
 
-    // Confirming the exit of the quiz
-    const confirmExitQuiz = () => {
+    // Confirming the exit of the Quiz
+    function confirmExitQuiz() {
         setIsExitQuizModalOpen(false); // Close the modal
 
         // Reset the App
@@ -248,16 +247,18 @@ function MultiQuiz() {
         console.log("Quiz exited");
     }
 
-    // Cancelling the exit of the quiz
-    const cancelExitQuiz = () => {
+    // Cancelling the exit of the Quiz
+    function cancelExitQuiz() {
         setIsExitQuizModalOpen(false) // Close the modal without exiting the quiz
     }
 
-    const handleExitApp = () => {
+    // Exit App handle function
+    function handleExitApp() {
         setIsExitAppModalOpen(true)
     }
 
-    const confirmExitApp = () => {
+    // Confirming the exit of the App
+    function confirmExitApp() {
         setGetStarted(false);
         setSelectedQuiz(null);
         setStart(false);
@@ -267,7 +268,8 @@ function MultiQuiz() {
         setWrongAnswers([]);
     }
 
-    const cancelExitApp = () => {
+    // Concaleing the exit of the App
+    function cancelExitApp() {
         setIsExitAppModalOpen(false) // Close the modal without exiting the quiz
     }
 
